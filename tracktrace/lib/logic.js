@@ -1,43 +1,59 @@
-/*
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-'use strict';
 /**
- * Write your transction processor functions here
- */
-
-/**
- * Sample transaction
- * @param {org.network.tracktrace.SampleTransaction} sampleTransaction
+ * Adding Raw material transaction
+ * @param {org.network.tracktrace.addRaw} newMaterial
  * @transaction
  */
-async function sampleTransaction(tx) {
-    // Save the old value of the asset.
-    const oldValue = tx.asset.value;
 
-    // Update the asset with the new value.
-    tx.asset.value = tx.newValue;
+async function addRaw(newMaterial) {
 
-    // Get the asset registry for the asset.
-    const assetRegistry = await getAssetRegistry('org.network.tracktrace.SampleAsset');
-    // Update the asset in the asset registry.
-    await assetRegistry.update(tx.asset);
+  const participantRegistry = await getParticipantRegistry('org.network.tracktrace.Grower');
+  var NS = 'org.network.tracktrace';
+  var material = getFactory().newResource(NS, 'Raw_material', Math.random().toString(36).substring(3));
+  console.log(material);
+  material.materialName = newMaterial.materialName
+  material.qty = newMaterial.qty
+  material.batchState = newMaterial.batchState
+  material.owner = newMaterial.grower
 
-    // Emit an event for the modified asset.
-    let event = getFactory().newEvent('org.network.tracktrace', 'SampleEvent');
-    event.asset = tx.asset;
-    event.oldValue = oldValue;
-    event.newValue = tx.newValue;
-    emit(event);
+  const assetRegistry = await getAssetRegistry('org.network.tracktrace.Raw_material');
+  await assetRegistry.add(material);
+  await participantRegistry.update(newMaterial.grower);
+}
+
+/**
+* Adding Raw material transaction
+* @param {org.network.tracktrace.paymentRaw} newPay
+* @transaction
+*/
+
+async function paymentRaw(newPay) {
+  
+    const participantRegistry = await getParticipantRegistry('org.network.tracktrace.Trader');	
+  var NS = 'org.network.tracktrace';
+    var Pay = getFactory().newResource(NS, 'Payment', Math.random().toString(36).substring(3));
+      Pay.organizationName = newPay.organizationName
+      Pay.amount = newPay.amount
+      Pay.qty = newPay.qty
+      Pay.rawbatchId = newPay.rawbatchId
+      Pay.trader = newPay.trader
+  
+    const AssetRegistry = await getAssetRegistry('org.network.tracktrace.Payment');
+      await AssetRegistry.add(Pay);
+      await participantRegistry.update(newPay.trader);
+}
+
+/**
+* Adding Raw material transaction
+* @param {org.network.tracktrace.packing} newPack
+* @transaction
+*/
+
+async function packing(newPack) {
+  
+  var NS = 'org.network.tracktrace';
+    var pack = getFactory().newResource(NS, 'Packing', Math.random().toString(36).substring(3));
+      pack.payId = newPack.payId
+  
+    const AssetRegistry = await getAssetRegistry('org.network.tracktrace.Packing');
+      await AssetRegistry.add(pack);
 }

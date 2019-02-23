@@ -12,11 +12,7 @@
  * limitations under the License.
  */
 
-/**
- * Write your model definitions here
- */
-
-namespace org.network.tracktrace
+namespace  org.network.tracktrace
 /**
  * # enums + concepts 
  */
@@ -82,6 +78,7 @@ asset Raw_material identified by batchId{
 
 asset Payment identified by payId{
     o String payId
+    --> Trader trader
 	o String organizationName optional
     o Double amount
     o Double qty
@@ -102,8 +99,7 @@ asset Packing identified by packId{
  	o String PL_VesselVoyage_No optional
   	o String PL_Container_No optional
   	o String PL_Seal_no optional
-  	o String PL_timestamp optional
-    o String rawbatchId
+    o String payId
 }
 
 asset Shipment identified by shipId{
@@ -113,7 +109,7 @@ asset Shipment identified by shipId{
   	o Double weightExpected optional
   	o Condition condition optional
   	o Boolean insectActivity optional
-    o String rawbatchId
+    o String packId
 }
 
 
@@ -122,7 +118,7 @@ asset Shipment identified by shipId{
 * # Transactions
 */
 
-transaction addCoffee{
+transaction addRaw{
   o String materialName
   o Double qty
   o State batchState
@@ -130,8 +126,7 @@ transaction addCoffee{
 }
 
 transaction paymentRaw{
-  	--> Business grower
-    --> Business trader
+  	--> Trader trader
 	o String organizationName optional
     o Double amount
     o Double qty
@@ -139,7 +134,6 @@ transaction paymentRaw{
 }
 
 transaction packing{
-	o String packId
   	o String PL_Invoice_no optional
  	o DateTime PL_IssueDate optional
  	o String PL_ICO_no optional
@@ -151,12 +145,12 @@ transaction packing{
   	o String PL_Container_No optional
   	o String PL_Seal_no optional
   	o String PL_timestamp optional
-    o String rawbatchId
+    o String payId
 }
 
 transaction shipment{
-  	--> Business trader
-    --> Business factory
+  	--> Business grower
+    --> Business trader
 	o String shipId
     o DateTime dateStripped optional
   	o String marks optional
