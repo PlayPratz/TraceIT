@@ -74,11 +74,13 @@ asset Raw_material identified by batchId{
     o Double qty
     o State batchState
     --> Business owner
+    --> Business trader optional
+    --> Business factory optional
 }
 
 asset Payment identified by payId{
     o String payId
-    --> Trader trader
+    --> Business trader
 	o String organizationName optional
     o Double amount
     o Double qty
@@ -100,6 +102,7 @@ asset Packing identified by packId{
   	o String PL_Container_No optional
   	o String PL_Seal_no optional
     o String payId
+    o String rawbatchId
 }
 
 asset Shipment identified by shipId{
@@ -110,6 +113,7 @@ asset Shipment identified by shipId{
   	o Condition condition optional
   	o Boolean insectActivity optional
     o String packId
+    o String rawbatchId
 }
 
 
@@ -146,16 +150,17 @@ transaction packing{
   	o String PL_Seal_no optional
   	o String PL_timestamp optional
     o String payId
+    o String rawbatchId
 }
 
 transaction shipment{
-  	--> Business grower
-    --> Business trader
-	o String shipId
+  	--> Grower grower
+    --> Trader trader
     o DateTime dateStripped optional
   	o String marks optional
   	o Double weightExpected optional
   	o Condition condition optional
   	o Boolean insectActivity optional
+    o String packId
     o String rawbatchId
 }
