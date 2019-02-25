@@ -1,30 +1,30 @@
-P| = r - ew MSGS LRU Ot as grey ss
+Sales Order
 
-ee Sem im eames nn ae at __¢ ae
-atm 200 conse as
+Sales Order Number : 1013
+Date of dispatch : 25/02/2019
 
- 
+Expected Arrival date : 26/02/2019
 
-   
-   
+Billing Address:
+Company name
+Address line 1
+Address line 2
+Phone number
+email
 
-   
+Shipping Address:
+Company name
+address line 1
+address line 2
+phone number
+email
 
-——
-eee
+Quantity(kg) | Material Name Unit Price(Rs.) Amount(Rs.)
+4 Wheat 400 1600
 
-fem em memes
+Subtotal : 75600
 
-POM Smee Rm come
+Sales Tax : 10%
 
- 
-
-inmost eanmsicen  Reemeieee a minn = —
-
-a neem ae eA Me RE mem
-
- 
-
-MMP MO SH PMO ROM mR mere emi RE
-
-Prima mm E Mme
+Shipping and handling charges : 400
+Total : 83560
