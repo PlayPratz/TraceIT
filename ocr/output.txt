@@ -1,0 +1,30 @@
+Sales Order
+
+Sales Order Number : 1013
+Date of dispatch : 25/02/2019
+
+Expected Arrival date : 26/02/2019
+
+Billing Address:
+Company name
+Address line 1
+Address line 2
+Phone number
+email
+
+Shipping Address:
+Company name
+address line 1
+address line 2
+phone number
+email
+
+Quantity(kg) | Material Name Unit Price(Rs.) Amount(Rs.)
+4 Wheat 400 1600
+
+Subtotal : 75600
+
+Sales Tax : 10%
+
+Shipping and handling charges : 400
+Total : 83560
