@@ -63,6 +63,7 @@ app.use(session({
 app.use('/user', userRoutes);
 
 app.get('/test', (req,res)=>{
+    console.log('entered')
     var description = {};
     Request.get("http://192.168.43.229:3000/api/Grower/666",(error,response,body)=>{
         if(error){
