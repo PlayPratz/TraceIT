@@ -11,7 +11,7 @@ async function traceRaw(NS, value) {
 }
 
 async function traceProduct(NS, value) {
-const shipRetail = await getAsset(NS, 'Shipment', value);
+	const shipRetail = await getAsset(NS, 'Shipment', value);
 	const shipDist = await getAsset(NS, 'Shipment', shipRetail.rawbatchId);
 	const product = await getAsset(NS, 'Jam', shipDist.rawbatchId);
 	console.log(shipRetail)
@@ -20,7 +20,7 @@ const shipRetail = await getAsset(NS, 'Shipment', value);
 }
 
 async function traceJam(NS, value) {
-const shipRetail = await getAsset(NS, 'Shipment', value);
+	const shipRetail = await getAsset(NS, 'Shipment', value);
 	const shipDist = await getAsset(NS, 'Shipment', shipRetail.rawbatchId);
 	const product = await getAsset(NS, 'Jam', shipDist.rawbatchId);
 	console.log(shipRetail)
@@ -48,10 +48,10 @@ async function addAsset(NS, asset, value) {
 }
 
 function getAsset(NS, asset, value) {
-return getAssetRegistry(`${NS}.${asset}`)
-			.then(function (assetRegistry) {
-				return assetRegistry.get(value);
-			})
+	return getAssetRegistry(`${NS}.${asset}`)
+		.then(function (assetRegistry) {
+			return assetRegistry.get(value);
+		})
 }
 
 async function updateAsset(NS, asset, value) {
