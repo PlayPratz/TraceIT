@@ -1,16 +1,11 @@
-<template>
-  <div class="home">
-    <InventoryTable />
-  </div>
+<template lang="html">
+  <h1>Rajasi make this Page Awesome</h1>
 </template>
 
 <script>
-import InventoryTable from '../components/InventoryTable'
-
 export default {
-  name: 'Home',
-  components: {
-    InventoryTable
-  }
 }
 </script>
+
+<style lang="css" scoped>
+</style>

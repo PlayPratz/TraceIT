@@ -9,11 +9,12 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat to="/">Home</v-btn>
-        <v-btn flat to="/about">About</v-btn>
-        <v-btn flat to="/chain">Chain</v-btn>
+        <v-btn flat to="/login">Login</v-btn>
+        <v-btn flat to="/register">Register</v-btn>
+        <!--v-btn flat to="/chain">Chain</v-btn>
         <v-btn flat to="/Product">Product</v-btn>
         <v-btn flat to="/form">Form</v-btn>
-          <v-btn flat to="/login ">Login</v-btn>
+        <v-btn flat to="/login ">Login</v-btn-->
       </v-toolbar-items>
     </v-toolbar>
     <router-view/>
