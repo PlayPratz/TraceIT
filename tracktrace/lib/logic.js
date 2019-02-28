@@ -26,7 +26,7 @@ async function traceJam(NS, value) {
 	console.log(shipRetail)
 	console.log(shipDist)
 	console.log(product)
-	traceRaw(NS,product.Mango)
+	traceRaw(NS, product.Mango)
 	// traceRaw(NS,product.Strawberry)
 	// traceRaw(NS,product.Sugar)
 }
@@ -38,8 +38,8 @@ async function traceCoffee(NS, value) {
 	console.log(shipRetail)
 	console.log(shipDist)
 	console.log(product)
-	traceRaw(NS,product.coffeebean)
-	traceRaw(NS,product.chicory)
+	traceRaw(NS, product.coffeebean)
+	traceRaw(NS, product.chicory)
 }
 
 async function addAsset(NS, asset, value) {
@@ -280,7 +280,7 @@ var NS = 'org.network.tracktrace';
 	const assetRegistry = await getAssetRegistry('org.network.tracktrace.Packing');
 	const exist = await assetRegistry.exists(newShip.packId);
 	if(exist) {
-			 await addAsset('org.network.tracktrace', 'Shipment', ship);
+		await addAsset('org.network.tracktrace', 'Shipment', ship);
 	}
 	else {
 		throw new Error('Asset BatchId doesnt exist: Failed at Shipment');
