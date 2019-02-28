@@ -56,7 +56,7 @@ import axios from 'axios';
       return {
         valid: true,
         id: '',
-        category: 0,
+        category: 3,
         idRules: [
           v => !!v || 'Login ID is required'
         ],
@@ -82,6 +82,20 @@ import axios from 'axios';
           if (this.category == 0) {
             this.$router.replace({ name: 'dashSupplier', params: { id: this.id } });
           }
+
+          if (this.category == 1) {
+            this.$router.replace({ name: 'dashtrader', params: { id: this.id } });
+          }
+          if (this.category == 2) {
+            this.$router.replace({ name: 'dashmanufacturer', params: { id: this.id } });
+          }
+          if (this.category == 3) {
+            this.$router.replace({ name: 'dashdistributor', params: { id: this.id } });
+          }
+          if (this.category == 4) {
+            this.$router.replace({ name: 'dashretailor', params: { id: this.id } });
+          }
+
 
         }
       },
