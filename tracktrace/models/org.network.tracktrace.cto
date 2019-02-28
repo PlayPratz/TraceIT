@@ -13,26 +13,27 @@
  */
 
 namespace  org.network.tracktrace
+
 /**
- * # enums + concepts 
+ * # enums + concepts
  */
 
 enum State {
-  o READY_FOR_DISTRIBUTION
-  o REGULATION_TEST_PASSED
-  o IMPORTED
+    o READY_FOR_DISTRIBUTION
+    o REGULATION_TEST_PASSED
+    o IMPORTED
 }
 
 concept Address {
-  o String city optional
-  o String country
-  o String street optional
-  o String zip optional
+    o String city optional
+    o String country
+    o String street optional
+    o String zip optional
 }
 
 concept Condition {
-  o Boolean condensation 
-  o Boolean holeInContainer 
+    o Boolean condensation
+    o Boolean holeInContainer
 }
 
 /**
@@ -40,8 +41,8 @@ concept Condition {
  */
 
 abstract participant Business {
-  o String organization
-  o Address address
+    o String organization
+    o Address address
 }
 
 participant Grower identified by growerId extends Business {
@@ -60,7 +61,7 @@ participant Factory identified by factId extends Business {
 	o String factId
 }
 
-participant Retailer identified by retailerId extends Business{
+participant Retailer identified by retailerId extends Business {
 	o String retailerId
 }
 
@@ -68,7 +69,7 @@ participant Retailer identified by retailerId extends Business{
  * # Assets
  */
 
-asset Raw_material identified by batchId{
+asset Raw_material identified by batchId {
 	o String batchId
     o String materialName
     o Double initialqty
@@ -77,7 +78,7 @@ asset Raw_material identified by batchId{
     --> Business owner
 }
 
-asset Jam identified by batchId{
+asset Jam identified by batchId {
 	o String batchId
     o String Mango
     o String Strawberry
@@ -87,7 +88,7 @@ asset Jam identified by batchId{
     --> Business owner
 }
 
-asset Bru identified by batchId{
+asset Bru identified by batchId {
 	o String batchId
     o String coffeebean
     o String chicory
@@ -96,7 +97,7 @@ asset Bru identified by batchId{
     --> Business owner
 }
 
-asset Payment identified by payId{
+asset Payment identified by payId {
     o String payId
     --> Business trader
 	o String For
@@ -105,9 +106,7 @@ asset Payment identified by payId{
     o String rawbatchId
 }
 
-
-
-asset Packing identified by packId{
+asset Packing identified by packId {
   	o String packId
   	o String PL_Invoice_no optional
  	o DateTime PL_IssueDate optional
@@ -124,11 +123,11 @@ asset Packing identified by packId{
     --> Business owner
 }
 
-asset Shipment identified by shipId{
+asset Shipment identified by shipId {
 	o String shipId
     o DateTime dateStripped optional
     o Double initialqty
-  	o Double qty 
+  	o Double qty
   	o Condition condition optional
   	o Boolean insectActivity optional
     o String packId
@@ -136,20 +135,18 @@ asset Shipment identified by shipId{
     --> Business trader
 }
 
-
-
 /**
 * # Transactions
 */
 
-transaction addRaw{
-  o String materialName
-  o Double qty
-  o State batchState
-  --> Grower grower
+transaction addRaw {
+    o String materialName
+    o Double qty
+    o State batchState
+    --> Grower grower
 }
 
-transaction addJam{
+transaction addJam {
     o String Mango
     o String Strawberry
     o String Sugar
@@ -157,29 +154,21 @@ transaction addJam{
     --> Business owner
 }
 
-transaction addBru{
+transaction addBru  {
 	o String coffeebean
     o String chicory
     o Double qty
     --> Business owner
 }
 
-transaction paymentRaw{
+transaction paymentRaw {
   	--> Business trader
     o Double amount
     o Double qty
     o String rawbatchId
 }
 
-transaction paymentTrade{
-  	--> Business trader
-	o String organizationName optional
-    o Double amount
-    o Double qty
-    o String rawbatchId
-}
-
-transaction paymentJam{
+transaction paymentTrade {
   	--> Business trader
 	o String organizationName optional
     o Double amount
@@ -187,7 +176,15 @@ transaction paymentJam{
     o String rawbatchId
 }
 
-transaction packing{
+transaction paymentJam {
+  	--> Business trader
+	o String organizationName optional
+    o Double amount
+    o Double qty
+    o String rawbatchId
+}
+
+transaction packing {
   	o String PL_Invoice_no optional
  	o DateTime PL_IssueDate optional
  	o String PL_ICO_no optional
@@ -204,12 +201,12 @@ transaction packing{
     --> Business owner
 }
 
-transaction trace{
+transaction trace {
 	o String shiprawId
     o String shipprodId
 }
 
-transaction shipment{
+transaction shipment {
     --> Business trader
     o DateTime dateStripped optional
   	o String marks optional
