@@ -45,11 +45,13 @@ var userRoutes   = require('./routes/user');
 
 var Request = require("request");
 
+var cors= require('cors');
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 
 // required for passport
 app.use(session({
@@ -64,7 +66,7 @@ app.use('/user', userRoutes);
 
 app.get('/test', (req,res)=>{
     var description = {};
-    Request.get("http://192.168.43.229:3000/api/Grower/666",(error,response,body)=>{
+    Request.get("http://192.168.43.229:3000/api/Grower/10",(error,response,body)=>{
         if(error){
             return console.log(error);
         }
