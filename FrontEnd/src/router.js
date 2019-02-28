@@ -6,6 +6,11 @@ import Product from './views/Product.vue'
 import Form from './views/Form.vue'
 import Login from './views/Login.vue'
 import DashSupplier from './views/Dash/DashSupplier.vue'
+import DashTrader from './views/Dash/DashTrader.vue'
+import DashManufacturer from './views/Dash/DashManufacturer.vue'
+import DashDistributor from './views/Dash/DashDistributor.vue'
+import DashRetailer from './views/Dash/DashRetailer.vue'
+
 
 Vue.use(Router)
 
@@ -45,6 +50,26 @@ export default new Router({
       path: '/dashsupplier',
       name: 'dashSupplier',
       component: DashSupplier
+    },
+    {
+      path: '/dashtrader',
+      name: 'dashtrader',
+      component: DashTrader
+    },
+    {
+      path: '/dashmanufacturer',
+      name: 'dashmanufacturer',
+      component: DashManufacturer
+    },
+    {
+      path: '/dashdistributor',
+      name: 'dashdistributor',
+      component: DashDistributor
+    },
+    {
+      path: '/dashretailor',
+      name: 'dashretailor',
+      component: DashRetailer
     }
   ]
 })
