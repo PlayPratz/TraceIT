@@ -43,7 +43,7 @@ module.exports = router;
 var insertDocuments = function(database, filePath, callback) {
     const db_name=database.db('TraceIt')
 
-    var collection = db_name.collection('user');
+    var collection = db_name.collection('images');
     collection.insertOne({'imagePath' : filePath }, (err, result) => {
         assert.equal(err, null);
         callback(result);

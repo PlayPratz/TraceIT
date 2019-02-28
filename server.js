@@ -1,47 +1,15 @@
-// const express = require('express')
-// const app = express()
-
-// let runPy = new Promise(function(success, nosuccess) {
-
-//     const { spawn } = require('child_process');
-//     const pyprog = spawn('python', ['./ocr/ocr.py -i '+/path/to/image+'-p threshold']);
-
-//     pyprog.stdout.on('data', function(data) {
-
-//         success(data);
-//     });
-
-//     pyprog.stderr.on('data', (data) => {
-
-//         nosuccess(data);
-//     });
-// });
-
-// app.get('/', (req, res) => {
-
-//     res.write('welcome\n');
-
-//     runPy.then(function(fromRunpy) {
-//         console.log(fromRunpy.toString());
-//         res.end(fromRunpy);
-//     });
-// })
-
-
-// server.js
-
 // set up ======================================================================
 // get all the tools we need
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8081;
-
+var mongoose = require('mongoose');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
-
-var userRoutes   = require('./routes/user');
+var User = require('./models/user');
+var userRoutes   = require('./routes/image');
 
 var Request = require("request");
 
@@ -60,9 +28,43 @@ app.use(session({
     saveUninitialized: true
 }));
 
+var conString = "mongodb://127.0.0.1:27017/TraceIt";
+mongoose.Promise=Promise;
+
+//Connecting to the database
+mongoose.connect(conString,(err) => {
+    console.log("Database connection", err);
+});
+
+ //login
+ app.post('/login', function(req,res){
+    // Request.get()
+    console.log(req.body.id)
+    var query = User.where({id:req.body.id});
+    query.findOne((err,user)=>{
+        console.log(user)
+        if(err){
+            return err
+        }
+        else if(!user){
+            res.sendStatus(401)
+        }
+        else{
+            console.log(req.body.password)
+            console.log(user.password)
+            if(req.body.password==user.password){
+                console.log(user.stakeholder);
+                res.send(user.stakeholder);
+            }
+            else{
+                res.sendStatus(500);
+            }
+        }
+    })
+})
 
 // routes ======================================================================
-app.use('/user', userRoutes);
+app.use('/image', userRoutes);
 
 app.get('/test', (req,res)=>{
     var description = {};
