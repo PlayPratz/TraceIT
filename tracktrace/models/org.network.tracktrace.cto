@@ -52,8 +52,8 @@ participant Trader identified by traderId extends Business {
 	o String traderId
 }
 
-participant Shipper identified by shipperId extends Business {
-	o String shipperId
+participant Distributor identified by disId extends Business {
+	o String disId
 }
 
 participant Factory identified by factId extends Business {
@@ -71,17 +71,35 @@ participant Retailer identified by retailerId extends Business{
 asset Raw_material identified by batchId{
 	o String batchId
     o String materialName
+    o Double initialqty
     o Double qty
     o State batchState
     --> Business owner
-    --> Business trader optional
-    --> Business factory optional
+}
+
+asset Jam identified by batchId{
+	o String batchId
+    o String Mango
+    o String Strawberry
+    o String Sugar
+    o Double initialqty
+    o Double qty
+    --> Business owner
+}
+
+asset Bru identified by batchId{
+	o String batchId
+    o String coffeebean
+    o String chicory
+    o Double initialqty
+    o Double qty
+    --> Business owner
 }
 
 asset Payment identified by payId{
     o String payId
     --> Business trader
-	o String organizationName optional
+	o String For
     o Double amount
     o Double qty
     o String rawbatchId
@@ -103,17 +121,19 @@ asset Packing identified by packId{
   	o String PL_Seal_no optional
     o String payId
     o String rawbatchId
+    --> Business owner
 }
 
 asset Shipment identified by shipId{
 	o String shipId
     o DateTime dateStripped optional
-  	o String marks optional
-  	o Double weightExpected optional
+    o Double initialqty
+  	o Double qty 
   	o Condition condition optional
   	o Boolean insectActivity optional
     o String packId
     o String rawbatchId
+    --> Business trader
 }
 
 
@@ -129,8 +149,38 @@ transaction addRaw{
   --> Grower grower
 }
 
+transaction addJam{
+    o String Mango
+    o String Strawberry
+    o String Sugar
+    o Double qty
+    --> Business owner
+}
+
+transaction addBru{
+	o String coffeebean
+    o String chicory
+    o Double qty
+    --> Business owner
+}
+
 transaction paymentRaw{
-  	--> Trader trader
+  	--> Business trader
+    o Double amount
+    o Double qty
+    o String rawbatchId
+}
+
+transaction paymentTrade{
+  	--> Business trader
+	o String organizationName optional
+    o Double amount
+    o Double qty
+    o String rawbatchId
+}
+
+transaction paymentJam{
+  	--> Business trader
 	o String organizationName optional
     o Double amount
     o Double qty
@@ -151,14 +201,19 @@ transaction packing{
   	o String PL_timestamp optional
     o String payId
     o String rawbatchId
+    --> Business owner
+}
+
+transaction trace{
+	o String shiprawId
+    o String shipprodId
 }
 
 transaction shipment{
-  	--> Grower grower
-    --> Trader trader
+    --> Business trader
     o DateTime dateStripped optional
   	o String marks optional
-  	o Double weightExpected optional
+  	o Double qty
   	o Condition condition optional
   	o Boolean insectActivity optional
     o String packId

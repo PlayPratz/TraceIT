@@ -34,7 +34,7 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || 8080;
+var port     = process.env.PORT || 8081;
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -86,10 +86,18 @@ app.get('/test', (req,res)=>{
         if(error){
             return console.dir(error);
         }
-    }); 
+    });
     */
-   
+
 });
+
+app.get('/test2', (req,res) =>{
+  Request.get("http://192.168.43.229:3000/api/Grower/666",(error,response,body)=>{
+      if(error){
+          return console.log(error);
+      }
+  });
+})
 
 // launch ======================================================================
 app.listen(port);
