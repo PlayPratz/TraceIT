@@ -8,22 +8,38 @@
       <v-toolbar-title>Title</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat to="/">Home</v-btn>
-        <v-btn flat to="/login">Login</v-btn>
-        <v-btn flat to="/register">Register</v-btn>
-        <!--v-btn flat to="/chain">Chain</v-btn>
-        <v-btn flat to="/Product">Product</v-btn>
-        <v-btn flat to="/form">Form</v-btn>
-        <v-btn flat to="/login ">Login</v-btn-->
+        <v-btn flat to="/" v-if="authenticated == false">Home</v-btn>
+        <v-btn flat to="/login" v-if="authenticated == false">Login</v-btn>
+        <v-btn flat to="/register" v-if="authenticated == false">Register</v-btn>
+        <v-btn flat to="/" v-if="authenticated" v-on:click.native="logout()" replace>Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <router-view/>
+    <router-view @authenticated="setAuthenticated"></router-view>
   </div>
 </template>
 
 <script type="text/javascript">
   export default {
-    name: "App"
+    name: "App",
+    data() {
+      return {
+        authenticated: false,
+      }
+    },
+    mounted() {
+      if(!this.authenticated) {
+          this.$router.replace({ name: "home" });
+      }
+    },
+    methods: {
+      setAuthenticated(status) {
+        this.authenticated = status;
+        console.log(status);
+      },
+      logout() {
+        this.authenticated = false;
+      }
+    }
   }
 </script>
 

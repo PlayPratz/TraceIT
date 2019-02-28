@@ -49,12 +49,14 @@
 </template>
 
 <script>
+import axios from 'axios';
   export default {
     name: "login",
     data() {
       return {
         valid: true,
         id: '',
+        category: 0,
         idRules: [
           v => !!v || 'Login ID is required'
         ],
@@ -67,11 +69,23 @@
     methods: {
       validate () {
         if (this.$refs.form.validate()) {
-          console.log(this.id);
+          const id=this.id;
+          const password=this.password;
+          this.$router.app.$emit("authenticated",true);
+          axios.post('http://192.168.0.113:8080/login', {
+            id,
+            password
+          })
+            .then(res => console.log(res.data))
+            .catch();
+        }
+          if (this.category == 0) {
+            this.$router.replace({ name: 'dashSupplier', params: { id: this.id } });
+          }
+
         }
       },
     }
-  }
 </script>
 <style scoped>
 
