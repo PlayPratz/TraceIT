@@ -75,7 +75,7 @@ asset Raw_material identified by batchId {
     o Double initialqty
     o Double qty
     o State batchState
-    --> Business owner
+    --> Grower owner
 }
 
 asset Jam identified by batchId {
@@ -204,6 +204,10 @@ transaction packing {
 transaction trace {
 	o String shiprawId
     o String shipprodId
+}
+
+transaction farmtotrader{
+	o String growerId
 }
 
 transaction shipment {
