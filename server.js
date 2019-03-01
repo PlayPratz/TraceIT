@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var User = require('./models/user');
+var Track = require('./models/track');
 var userRoutes   = require('./routes/image');
 
 var Request = require("request");
@@ -19,7 +20,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors());
 
 // required for passport
 app.use(session({
@@ -59,9 +60,20 @@ mongoose.connect(conString,(err) => {
 });
 
 // //logging arduino data
-// app.post('/livetracking',function(req,res){
-    
-// });
+app.post('/livetracking',function(req,res){
+    console.log(req.body);
+    Track.update({batch_id:req.body.batch_id},{
+        $push : {
+            "location" : {
+                "lat" : req.body.lat,
+                "lon" : req.body.lon
+            },
+            "temperature" : req.body.temp,
+            "humidity" : req.body.humidity,
+            "timestamp" : req.body.time
+        }
+    });
+});
 
 // routes ======================================================================
 app.use('/image', userRoutes);

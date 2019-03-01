@@ -7,9 +7,10 @@ module.exports = mongoose.model("Track",{
         lat : String,
         lon : String
     }],
-    Temperature : [{ 
+    temperature : [{ 
         type : String}],
-    Humidity : [{
+    humidity : [{
         type : String}],
-    timestamp: String
+    timestamp: [{
+        type : String}]
 });
