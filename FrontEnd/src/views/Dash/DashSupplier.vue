@@ -218,6 +218,7 @@ export default {
       salesDialog: false,
       packTicket: false,
       shipTicket: false,
+      //Big Card Details
       chainDetails: {
         rawMaterialSupplier: {
           id: "123456",
@@ -234,6 +235,9 @@ export default {
           address3: "India"
         }
       },
+      //Small Card Details
+      
+      //Table Details
       headers: [
         {
           text: 'ID',

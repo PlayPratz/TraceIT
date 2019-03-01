@@ -56,7 +56,7 @@ import axios from 'axios';
       return {
         valid: true,
         id: '',
-        category: 3,
+        category: 0,
         idRules: [
           v => !!v || 'Login ID is required'
         ],
