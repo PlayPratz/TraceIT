@@ -39,29 +39,29 @@ mongoose.connect(conString,(err) => {
  //login
  app.post('/login', function(req,res){
     // Request.get()
-    console.log(req.body.id)
     var query = User.where({id:req.body.id});
     query.findOne((err,user)=>{
-        console.log(user)
         if(err){
-            return err
+            return err;
         }
         else if(!user){
-            res.sendStatus(401)
+            res.sendStatus(401);
         }
         else{
-            console.log(req.body.password)
-            console.log(user.password)
             if(req.body.password==user.password){
-                console.log(user.stakeholder);
                 res.send(user.stakeholder);
             }
             else{
                 res.sendStatus(500);
             }
         }
-    })
-})
+    });
+});
+
+// //logging arduino data
+// app.post('/livetracking',function(req,res){
+    
+// });
 
 // routes ======================================================================
 app.use('/image', userRoutes);
