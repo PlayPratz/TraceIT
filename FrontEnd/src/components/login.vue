@@ -72,11 +72,11 @@ import axios from 'axios';
           const id=this.id;
           const password=this.password;
           this.$router.app.$emit("authenticated",true);
-          axios.post('http://192.168.0.113:8080/login', {
+          axios.post('http://192.168.0.113:8081/login', {
             id,
             password
           })
-            .then(res => console.log(res.data))
+            .then(res => this.category = res.data)
             .catch();
         }
           if (this.category == 0) {
