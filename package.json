@@ -30,6 +30,7 @@
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "nodemon": "^1.18.10",
+    "package.json": "^2.0.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "request": "^2.88.0"
