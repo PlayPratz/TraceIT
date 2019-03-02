@@ -2,6 +2,7 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
+var http = require("http").Server(app);
 var port     = process.env.PORT || 8081;
 var mongoose = require('mongoose');
 var morgan       = require('morgan');
@@ -11,6 +12,7 @@ var session      = require('express-session');
 var User = require('./models/user');
 var Track = require('./models/track');
 var userRoutes   = require('./routes/image');
+var io = require('socket.io')(http);
 
 var ip =  "http://192.168.43.229:3000";
 
@@ -152,6 +154,23 @@ app.post('/paymentUploadDistributor',function(req,res){
     }
 });
 
+app.post('/nfc',(req,res)=>{
+   io.emit('message',{   
+        packingid:"123",
+        products:[{          
+            "name":"Coffee",          
+            "id":"234",          
+            "batch":"6",          
+            "quantity":"25"
+        },{          
+            name:"Chicory",          
+            id:"235",          
+            batch:"10",          
+            quantity:"30"
+        }] 
+   }); 
+   res.sendStatus(200);
+});
 
 app.post('/paymentUploadFactory',function(req,res){
     try{
@@ -240,5 +259,7 @@ app.get('/test2', (req,res) =>{
 });
 
 // launch ======================================================================
-app.listen(port);
-console.log('The magic happens on port ' + port);
+//creating a server
+var server = http.listen(8081, () => {
+    console.log("Well done, now I am listening on ", server.address().port)
+});
