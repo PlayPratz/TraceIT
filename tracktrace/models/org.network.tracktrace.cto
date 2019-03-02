@@ -34,6 +34,7 @@ concept Address {
 concept Condition {
     o Boolean condensation
     o Boolean holeInContainer
+    o Boolean insectActivity 
 }
 
 /**
@@ -75,7 +76,7 @@ asset Raw_material identified by batchId {
     o Double initialqty
     o Double qty
     o State batchState
-    --> Business owner
+    --> Grower owner
 }
 
 asset Jam identified by batchId {
@@ -108,16 +109,11 @@ asset Payment identified by payId {
 
 asset Packing identified by packId {
   	o String packId
-  	o String PL_Invoice_no optional
- 	o DateTime PL_IssueDate optional
- 	o String PL_ICO_no optional
-  	o String PL_ICO_Lot optional
-  	o String PL_FDA_NO optional
-  	o String PL_Bill_of_Lading_No optional
-  	o String PL_LoadedVessel optional
- 	o String PL_VesselVoyage_No optional
-  	o String PL_Container_No optional
-  	o String PL_Seal_no optional
+  	o String PL_Invoice_no 
+ 	o DateTime PL_IssueDate 
+	o DateTime expectedDate
+    o String remark
+    o Double qty
     o String payId
     o String rawbatchId
     --> Business owner
@@ -125,11 +121,11 @@ asset Packing identified by packId {
 
 asset Shipment identified by shipId {
 	o String shipId
-    o DateTime dateStripped optional
+    o DateTime dateArrived 
     o Double initialqty
   	o Double qty
-  	o Condition condition optional
-  	o Boolean insectActivity optional
+  	o String remark
+    o Condition condition
     o String packId
     o String rawbatchId
     --> Business trader
@@ -185,17 +181,11 @@ transaction paymentJam {
 }
 
 transaction packing {
-  	o String PL_Invoice_no optional
- 	o DateTime PL_IssueDate optional
- 	o String PL_ICO_no optional
-  	o String PL_ICO_Lot optional
-  	o String PL_FDA_NO optional
-  	o String PL_Bill_of_Lading_No optional
-  	o String PL_LoadedVessel optional
- 	o String PL_VesselVoyage_No optional
-  	o String PL_Container_No optional
-  	o String PL_Seal_no optional
-  	o String PL_timestamp optional
+  	o String PL_Invoice_no 
+ 	o DateTime PL_IssueDate 
+	o DateTime expectedDate
+    o String remark
+    o Double qty
     o String payId
     o String rawbatchId
     --> Business owner
@@ -206,13 +196,16 @@ transaction trace {
     o String shipprodId
 }
 
+transaction farmtotrader{
+	o String growerId
+}
+
 transaction shipment {
     --> Business trader
-    o DateTime dateStripped optional
-  	o String marks optional
+    o DateTime dateArrived 
   	o Double qty
-  	o Condition condition optional
-  	o Boolean insectActivity optional
+  	o String remark
+    o Condition condition
     o String packId
     o String rawbatchId
 }

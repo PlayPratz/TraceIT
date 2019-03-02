@@ -1,27 +1,27 @@
-query Q1 {
-    description: "Select Grower from raw materials"
-    statement:
-        SELECT org.network.tracktrace.Raw_material
-            WHERE (batchId == _$IdParam)
+query Q1{
+  description: "Select Grower from raw materials"
+  statement:
+      SELECT org.network.tracktrace.Raw_material
+          WHERE (batchId == _$IdParam)
 }
 
-query Q2 {
-    description: "Select Payment value for particular bacth of raw materials"
-    statement:
-        SELECT org.network.tracktrace.Payment
-            WHERE (rawbatchId == _$IdParam)
+query Q2{
+  description: "Select Payment value for particular bacth of raw materials"
+  statement:
+      SELECT org.network.tracktrace.Payment
+          WHERE (rawbatchId == _$IdParam)
 }
 
-query Q3 {
-    description: "Select Packing value for particular bacth of raw materials"
-    statement:
-        SELECT org.network.tracktrace.Packing
-            WHERE (rawbatchId == _$IdParam)
+query Q3{
+  description: "Select Packing value for particular bacth of raw materials"
+  statement:
+      SELECT org.network.tracktrace.Packing
+          WHERE (rawbatchId == _$IdParam)
 }
 
-query Q4 {
-    description: "Select Shipment value for particular bacth of raw materials"
-    statement:
-        SELECT org.network.tracktrace.Shipment
-            WHERE (rawbatchId == _$IdParam)
+query Q4{
+  description: "Select Shipment value for particular bacth of raw materials"
+  statement:
+      SELECT org.network.tracktrace.Shipment
+          WHERE (rawbatchId == _$IdParam)
 }

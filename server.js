@@ -9,7 +9,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var User = require('./models/user');
+var Track = require('./models/track');
 var userRoutes   = require('./routes/image');
+
+var ip =  "http://192.168.43.229:3000";
 
 var Request = require("request");
 
@@ -19,7 +22,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors());
 
 // required for passport
 app.use(session({
@@ -39,29 +42,164 @@ mongoose.connect(conString,(err) => {
  //login
  app.post('/login', function(req,res){
     // Request.get()
-    console.log(req.body.id)
     var query = User.where({id:req.body.id});
     query.findOne((err,user)=>{
-        console.log(user)
         if(err){
-            return err
+            return err;
         }
         else if(!user){
-            res.sendStatus(401)
+            res.sendStatus(401);
         }
         else{
-            console.log(req.body.password)
-            console.log(user.password)
             if(req.body.password==user.password){
-                console.log(user.stakeholder);
                 res.send(user.stakeholder);
             }
             else{
                 res.sendStatus(500);
             }
         }
-    })
-})
+    });
+});
+
+//uploading payment details of Raw materials from supplier to trader on the blockchain
+app.post('/paymentUploadRaw',function(req,res){
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" :"org.network.tracktrace.paymentRaw",
+            "trader" : "resource:org.network.tracktrace.Trader#"+req.body.traderID,
+            "amount" : req.body.amount,
+            "qty" : req.body.quantity,
+            "rawbatchId" : req.body.batchID
+        };
+        console.log(typeof toSend);
+        var options = { 
+            method: 'POST',
+            url: ip+"/api/paymentRaw/",
+            headers:{ 
+                'Content-Type': 'application/json' },
+            body: toSend,
+            json: true };
+
+        Request(options, function (error, response, body) {
+            if (error){
+                throw new Error(error);
+            } 
+          
+            console.log(body);
+        });
+
+        res.sendStatus(200);    
+    }
+    catch(error){
+        // console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.post('/packingUploadRaw',function(req,res){
+    console.log(req.body);
+    res.sendStatus(200);
+});
+
+app.post('/paymentUploadTrader',function(req,res){
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" : "org.network.tracktrace.paymentTrade",
+            "trader": "resource:org.network.tracktrace.Factory"+req.body.factoryID, 
+            "amount": req.body.amount, 
+            "qty": req.body.quantity, 
+            "rawbatchId": req.body.batchID
+        };
+        Request.post(ip+"/api/paymentTrade",(error,success)=>{
+            if(error){
+                console.log(error);
+            }
+            else{
+                console.log(success);
+            }
+        });
+        res.sendStatus(200);
+    }
+    catch(error){
+        res.sendStatus(500);
+    }
+});
+
+app.post('/paymentUploadDistributor',function(req,res){
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" : "org.network.tracktrace.paymentTrade",
+            "trader": "resource:org.network.tracktrace.Retailer"+req.body.retailerID, 
+            "amount": req.body.amount, 
+            "qty": req.body.quantity, 
+            "rawbatchId": req.body.batchID
+        };
+        Request.post(ip+"/api/paymentTrade",(error,success)=>{
+            if(error){
+                console.log(error);
+            }
+            else{
+                console.log(success);
+            }
+        });
+        res.sendStatus(200);
+    }
+    catch(error){
+        res.sendStatus(500);
+    }
+});
+
+
+app.post('/paymentUploadFactory',function(req,res){
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" : "org.network.tracktrace.paymentJam",
+            "trader": "resource:org.network.tracktrace.Distributor"+req.body.distributorID, 
+            "amount": req.body.amount, 
+            "qty": req.body.quantity, 
+            "rawbatchId": req.body.batchID
+        };
+        Request.post(ip+"/api/paymentTrade",(error,success)=>{
+            if(error){
+                console.log(error);
+            }
+            else{
+                console.log(success);
+            }
+        });
+        res.sendStatus(200);
+    }
+    catch(error){
+        res.sendStatus(500);
+    }
+});
+
+// //logging arduino data
+app.post('/livetracking',function(req,res){
+    var locationD = {
+        lat : req.body.lat,
+        lon : req.body.lon
+    };
+    Track.update({batch_id:req.body.batch_id},{
+        $push : {
+            location : locationD,
+            temperature : req.body.temp,
+            humidity : req.body.humidity,
+            timestamp : req.body.timestamp
+        }
+    },function(error,success){
+        if(error){
+            console.log(error);
+        }
+        else{
+            console.log(success)
+        }
+    });
+});
 
 // routes ======================================================================
 app.use('/image', userRoutes);
@@ -94,12 +232,12 @@ app.get('/test', (req,res)=>{
 });
 
 app.get('/test2', (req,res) =>{
-  Request.get("http://192.168.43.229:3000/api/Grower/666",(error,response,body)=>{
+  Request.get(ip+"/api/Grower/666",(error,response,body)=>{
       if(error){
           return console.log(error);
       }
   });
-})
+});
 
 // launch ======================================================================
 app.listen(port);

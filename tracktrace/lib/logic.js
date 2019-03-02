@@ -60,6 +60,35 @@ async function updateAsset(NS, asset, value) {
 }
 
 /*	The End*/
+/**
+* Tracing history of Raw materials from Factory to Point of Origin
+* @param {org.network.tracktrace.farmtotrader} own
+* @transaction
+*/
+async function farmtotrader(own){
+	const assetRegistry = await getAssetRegistry('org.network.tracktrace.Raw_material');
+  	const packRegistry = await getAssetRegistry('org.network.tracktrace.Packing');
+  	const payRegistry = await getAssetRegistry('org.network.tracktrace.Payment');
+  	const shipRegistry = await getAssetRegistry('org.network.tracktrace.Shipment');
+  	const raw = await assetRegistry.getAll()
+    const pack = await packRegistry.getAll()
+    const pay = await payRegistry.getAll()
+    const ship = await shipRegistry.getAll()
+    var trader=[]
+    for (var r in raw){
+    	//console.log(raw[r].owner.$identifier)
+      	if(own.growerId==raw[r].owner.$identifier){
+        	var payment = await query('Q2',{IdParam:raw[r].batchId})
+            
+            var packing = await query('Q3',{IdParam:raw[r].batchId})
+            var shipment = await query('Q4',{IdParam:raw[r].batchId})
+            var trade = {packing,packing,shipment}
+     		trader.push(trade)
+        }
+      	
+    }
+  	console.log(trader)
+}
 
 /**
 * Tracing history of Raw materials from Factory to Point of Origin
@@ -251,7 +280,12 @@ async function paymentJam(newPay) {
 async function packing(newPack) {
 	var NS = 'org.network.tracktrace';
 	var pack = getFactory().newResource(NS, 'Packing', Math.random().toString(36).substring(3));
-	pack.payId = newPack.payId;
+  	pack.PL_Invoice_no  = newPack.PL_Invoice_no ;
+  	pack.PL_IssueDate = newPack.PL_IssueDate;
+  	pack.expectedDate = newPack.expectedDate;
+  	pack.remark = newPack.remark;
+  	pack.qty = newPack.qty;
+  	pack.payId = newPack.payId;
 	pack.rawbatchId = newPack.rawbatchId;
 	pack.owner = newPack.owner;
 	const assetRegistry = await getAssetRegistry('org.network.tracktrace.Payment');
@@ -272,6 +306,9 @@ async function packing(newPack) {
 async function shipment(newShip) {
 var NS = 'org.network.tracktrace';
 	var ship = getFactory().newResource(NS, 'Shipment', Math.random().toString(36).substring(3));
+  	ship.dateArrived = newShip.dateArrived;
+  	ship.remark = newShip.remark;
+  	ship.condition = newShip.condition;
 	ship.packId = newShip.packId;
 	ship.rawbatchId = newShip.rawbatchId;
 	ship.trader = newShip.trader;
