@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1565C0</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="colorAccent">#ff6f00</color>
+
+    <color name="bill">#4caf50</color>
+    <color name="packing">#c62828</color>
+    <color name="ship">#00838f</color>
+    <color name="submit">#388e3c</color>
+</resources>
