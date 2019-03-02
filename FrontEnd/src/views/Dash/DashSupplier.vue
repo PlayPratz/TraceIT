@@ -31,10 +31,10 @@
       >
         <v-layout justify-space-between>
           <v-flex xs7>
-            The Order was placed by "Awesome rawMaterialSupplier"<br/><br/>
+            The Order was placed"<br/><br/>
             <v-btn small color="primary" dark @click="salesDialog = true">Sales Order</v-btn>
           </v-flex>
-          <v-flex xs5 text-xs-right>15:26 EDT</v-flex>
+          <v-flex xs5 text-xs-right>{{smallCardDetails.sales.timestamp}}</v-flex>
         </v-layout>
       </v-timeline-item>
 
@@ -49,10 +49,10 @@
         <v-card-title class="headline text-lg-left blue--text">Sales Order</v-card-title>
 
         <v-card-text class="text-lg-left">
-          <h3>Payment ID: 1001234<br />
-          Material Name: Coffee beans<br />
-          Quantity: 10kg<br />
-          Amount: 10500</h3>
+          <h3>Payment ID: {{smallCardDetails.sales.paymentId}}<br />
+          Material Name: {{smallCardDetails.sales.materialName}}<br />
+          Quantity: {{smallCardDetails.sales.quantity}}<br />
+          Amount: {{smallCardDetails.sales.amount}}</h3>
         </v-card-text>
 
         <v-card-actions>
@@ -80,7 +80,7 @@
             Order is packed and ready to be shipped.<br/><br/>
             <v-btn small color="primary" dark @click="packTicket = true">Packing Ticket</v-btn>
           </v-flex>
-          <v-flex xs5 text-xs-right>18:45 IST</v-flex>
+          <v-flex xs5 text-xs-right>{{smallCardDetails.packing.timestamp}}</v-flex>
         </v-layout>
       </v-timeline-item>
 
@@ -93,10 +93,10 @@
           <v-card-title class="headline  text-lg-left blue--text">Packing Ticket</v-card-title>
 
           <v-card-text class="text-lg-left">
-            <h3>Packment ID: 12345<br />
-            Material Name: Coffee beans<br />
-            Quantity: 10kg<br />
-            Delivery Date: 12/02/1999</h3>
+            <h3>Packment ID: {{smallCardDetails.packing.paymentId}}<br />
+            Material Name: {{smallCardDetails.packing.materialName}}<br />
+            Quantity: {{smallCardDetails.packing.quantity}}<br />
+            Delivery Date: {{smallCardDetails.packing.delivery}}</h3>
           </v-card-text>
 
           <v-card-actions>
@@ -120,10 +120,10 @@
       >
         <v-layout justify-space-between>
           <v-flex xs7>
-            Order has arrived at "Awesome Place".<br /><br />
+            Order has arrived.<br /><br />
             <v-btn small color="primary" dark @click="shipTicket = true">Shipment Ticket</v-btn>
           </v-flex>
-          <v-flex xs5 text-xs-right>22:45 IST</v-flex>
+          <v-flex xs5 text-xs-right>{{smallCardDetails.shipment.timestamp}}</v-flex>
         </v-layout>
       </v-timeline-item>
 
@@ -137,13 +137,13 @@
           <v-card-title class="headline  text-lg-left blue--text">Shipment Ticket</v-card-title>
 
           <v-card-text class="text-lg-left">
-            <h3>Packment ID: 12345<br />
-            Material Name: Coffee beans<br />
-            Quantity: 10kg<br />
-            Holes: false<br />
-            Condensation: false<br />
-            Insect Activity: false<br />
-            Delivery Date: 12/02/1999</h3>
+            <h3>Packment ID: {{smallCardDetails.shipment.paymentId}}<br />
+            Material Name: {{smallCardDetails.shipment.materialName}}<br />
+            Quantity: {{smallCardDetails.shipment.quantity}}<br />
+            Holes: {{smallCardDetails.shipment.holes}}<br />
+            Condensation: {{smallCardDetails.shipment.condensation}}<br />
+            Insect Activity: {{smallCardDetails.shipment.insect}}<br />
+            Delivery Date: {{smallCardDetails.shipment.delivery}}</h3>
           </v-card-text>
 
           <v-card-actions>
@@ -184,7 +184,7 @@
                   <v-flex xs10>
                       <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.trader.name}}</h3>
                       <br />
-                      <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.trader.address1}}<br>{{chainDetails.trader.address2}}<br />{{chainDetails.trader.address3}}</h3>
+                      <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.trader.address1}}<br>{{chainDetails.trader.address2}}<br />{{chainDetails.trader.address3}}</h3><br/>
                       <v-data-table
                         :headers="headers"
                         :items="traders"
@@ -236,7 +236,32 @@ export default {
         }
       },
       //Small Card Details
-      
+      smallCardDetails: {
+        sales: {
+          paymentId: "0001",
+          materialName: "Coffee Beans",
+          quantity: "12Kg",
+          amount: "10200",
+          timestamp: "15:45 IST"
+        },
+        packing: {
+          paymentId: "0001",
+          materialName: "Coffee Beans",
+          quantity: "12Kg",
+          delivery: "12/02/2020",
+          timestamp: "18:45 IST"
+        },
+        shipment: {
+          paymentId: "0001",
+          materialName: "Coffee Beans",
+          quantity: "12Kg",
+          holes: "false",
+          condensation: "false",
+          insect: "false",
+          delivery: "13/02/2020",
+          timestamp: "22:45 IST"
+        },
+      },
       //Table Details
       headers: [
         {
