@@ -38,7 +38,7 @@ The idea is the design a system that can keep track of the flow of goods from pa
 ### Manufacturing and storing in a Warehouse
 + Once units are created, the container is scanned and then a product is scanned. Then the container is filled with products from the same batch. As a result, that container is mapped to the current batch of products.
 + This container is mapped to a pallet in a similar fashion.
-+ Now, a pallet is added to a bin in the warehouse by mapping the pallet to the bin. If x containers are sent, then all of them are mapped to the pallet.
++ Now, a pallet is added to a bin in the warehouse by mapping the pallet to the bin. If multiple containers are sent, then all of them are mapped to the pallet.
 
 ### Dispatching from Warehouse
 + The product that is to be dispatched is mapped to the container in which it will be shipped. The quantity of the product is entered.
