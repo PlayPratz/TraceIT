@@ -210,6 +210,7 @@
 
 <script>
 import axios from 'axios';
+import io from 'socket.io-client';
 export default {
   name: "ProductChain",
   data() {
@@ -283,7 +284,8 @@ export default {
           address2: "Maharastra",
           address3: "India"
         }
-      ]
+      ],
+    socket : io('192.168.43.149:8081')
     }
   },
   created() {
@@ -293,7 +295,13 @@ export default {
     updateTrader(index) {
         this.chainDetails.trader = this.traders[index];
     }
-  }
+  },
+  mounted() {
+       this.socket.on('message', (data) => {
+           console.log(data);
+           // you can also do this.messages.push(data)
+       });
+   }
 }
 </script>
 
