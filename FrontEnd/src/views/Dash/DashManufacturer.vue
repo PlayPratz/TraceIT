@@ -187,15 +187,15 @@
               >
                 mdi-magnify
               </v-icon>
-              <h2 class="display-1 white--text font-weight-light">rawMaterialSupplier</h2>
+              <h2 class="display-1 white--text font-weight-light">Trader</h2>
             </v-card-title>
             <v-container>
               <v-layout>
 
                   <v-flex xs10>
-                      <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.rawMaterialSupplier.name}}</h3>
+                      <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.trader.name}}</h3>
                       <br />
-                      <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.rawMaterialSupplier.address1}}<br>{{chainDetails.rawMaterialSupplier.address2}}<br />{{chainDetails.rawMaterialSupplier.address3}}</h3>
+                      <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.trader.address1}}<br>{{chainDetails.trader.address2}}<br />{{chainDetails.trader.address3}}</h3>
                   </v-flex>
 
 
@@ -538,6 +538,18 @@
                         <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.distributor.name}}</h3>
                         <br />
                         <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.distributor.address1}}<br>{{chainDetails.distributor.address2}}<br />{{chainDetails.distributor.address3}}</h3>
+                        <v-data-table
+                          :headers="headers"
+                          :items="distributors"
+                          class="elevation-1"
+                        >
+                          <template slot="items" slot-scope="props">
+                            <tr @click="updateDistributor(props.index)">
+                              <td class="text-xs-left">{{ props.item.id }}</td>
+                              <td class="text-xs-left">{{ props.item.name }}</td>
+                            </tr>
+                          </template>
+                        </v-data-table>
                     </v-flex>
 
 
@@ -588,13 +600,39 @@ export default {
           address1: "Some Distributor Address in nagpur,",
           address2: "Maharastra",
           address3: "India"
+        }
+      },
+      headers: [
+        {
+          text: 'ID',
+          sortable: false,
+          value: 'id'
         },
-      }
+        {
+          text: 'Name',
+          sortable: false,
+          value: 'name'
+        }
+      ],
+      distributors: [
+        {
+          id: "2016",
+          name: "Calden",
+          address1: "Some Distributor Address in nagpur,",
+          address2: "Maharastra",
+          address3: "India"
+        }
+      ]
     }
   },
   created() {
            this.id = this.$route.params.id;
-       }
+       },
+  methods: {
+    updateDistributor(index) {
+        this.chainDetails.distributors = this.distributors[index];
+    }
+  }
 }
 </script>
 

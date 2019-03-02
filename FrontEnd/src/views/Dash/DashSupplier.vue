@@ -176,7 +176,7 @@
               >
                 mdi-magnify
               </v-icon>
-              <h2 class="display-1 white--text font-weight-light">rawMaterialSupplier</h2>
+              <h2 class="display-1 white--text font-weight-light">Traders</h2>
             </v-card-title>
             <v-container>
               <v-layout>
