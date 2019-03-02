@@ -203,7 +203,6 @@ transaction farmtotrader{
 transaction shipment {
     --> Business trader
     o DateTime dateArrived 
-    o Double initialqty
   	o Double qty
   	o String remark
     o Condition condition

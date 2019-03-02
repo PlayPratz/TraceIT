@@ -284,7 +284,7 @@ async function packing(newPack) {
   	pack.PL_IssueDate = newPack.PL_IssueDate;
   	pack.expectedDate = newPack.expectedDate;
   	pack.remark = newPack.remark;
-  	pack.qty = newPack.remark;
+  	pack.qty = newPack.qty;
   	pack.payId = newPack.payId;
 	pack.rawbatchId = newPack.rawbatchId;
 	pack.owner = newPack.owner;
