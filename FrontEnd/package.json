@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "socket.io-client": "^2.2.0",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
+    "vue-websocket": "^0.2.3",
     "vue2-google-maps": "^0.10.6",
     "vuetify": "^1.5.2"
   },
@@ -46,5 +48,9 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "description": "aa",
+  "main": "babel.config.js",
+  "author": "",
+  "license": "ISC"
 }
