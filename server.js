@@ -59,18 +59,26 @@ mongoose.connect(conString,(err) => {
     });
 });
 
+
 // //logging arduino data
 app.post('/livetracking',function(req,res){
-    console.log(req.body);
+    var locationD = {
+        lat : req.body.lat,
+        lon : req.body.lon
+    };
     Track.update({batch_id:req.body.batch_id},{
         $push : {
-            "location" : {
-                "lat" : req.body.lat,
-                "lon" : req.body.lon
-            },
-            "temperature" : req.body.temp,
-            "humidity" : req.body.humidity,
-            "timestamp" : req.body.time
+            location : locationD,
+            temperature : req.body.temp,
+            humidity : req.body.humidity,
+            timestamp : req.body.timestamp
+        }
+    },function(error,success){
+        if(error){
+            console.log(error);
+        }
+        else{
+            console.log(success)
         }
     });
 });
