@@ -1,9 +1,15 @@
 <template lang="html">
-  <h1>Rajasi make this Page Awesome</h1>
+  <home/>
 </template>
 
 <script>
+import home from '../components/home.vue'
 export default {
+  name: 'Home',
+  components: {
+    home
+  }
+
 }
 </script>
 

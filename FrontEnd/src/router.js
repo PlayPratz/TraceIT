@@ -5,6 +5,7 @@ import Chain from './views/Chain.vue'
 import Product from './views/Product.vue'
 import Form from './views/Form.vue'
 import Login from './views/Login.vue'
+import Table from './views/Table.vue'
 import DashSupplier from './views/Dash/DashSupplier.vue'
 import DashTrader from './views/Dash/DashTrader.vue'
 import DashManufacturer from './views/Dash/DashManufacturer.vue'
@@ -67,9 +68,15 @@ export default new Router({
       component: DashDistributor
     },
     {
-      path: '/dashretailor',
-      name: 'dashretailor',
+      path: '/dashretailer',
+      name: 'dashretailer',
       component: DashRetailer
-    }
+    },
+    {
+      path: '/InventoryTable',
+      name: 'InventoryTable',
+      component: Table
+    },
+
   ]
 })

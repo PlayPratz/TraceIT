@@ -56,7 +56,7 @@ import axios from 'axios';
       return {
         valid: true,
         id: '',
-        category: 3,
+        category: 4,
         idRules: [
           v => !!v || 'Login ID is required'
         ],
@@ -93,7 +93,7 @@ import axios from 'axios';
             this.$router.replace({ name: 'dashdistributor', params: { id: this.id } });
           }
           if (this.category == 4) {
-            this.$router.replace({ name: 'dashretailor', params: { id: this.id } });
+            this.$router.replace({ name: 'dashretailer', params: { id: this.id } });
           }
 
 

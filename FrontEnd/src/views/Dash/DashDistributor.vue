@@ -710,6 +710,18 @@
                             <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.retailer.name}}</h3>
                             <br />
                             <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.retailer.address1}}<br>{{chainDetails.retailer.address2}}<br />{{chainDetails.retailer.address3}}</h3>
+                            <v-data-table
+                              :headers="headers"
+                              :items="retailers"
+                              class="elevation-1"
+                            >
+                              <template slot="items" slot-scope="props">
+                                <tr @click="updateRetailer(props.index)">
+                                  <td class="text-xs-left">{{ props.item.id }}</td>
+                                  <td class="text-xs-left">{{ props.item.name }}</td>
+                                </tr>
+                              </template>
+                            </v-data-table>
                         </v-flex>
 
 
@@ -766,11 +778,40 @@ export default {
           address1: "Some Retailer Address in nagpur,",
           address2: "Maharastra",
           address3: "India"
-        },
+        }
 
-      }
+      },
+      headers: [
+        {
+          text: 'ID',
+          sortable: false,
+          value: 'id'
+        },
+        {
+          text: 'Name',
+          sortable: false,
+          value: 'name'
+        }
+      ],
+      retailers: [
+        {
+          id: "2016",
+          name: "Calden",
+          address1: "Some Retailer Address in nagpur,",
+          address2: "Maharastra",
+          address3: "India"
+        }
+      ]
     }
   },
+  created() {
+           this.id = this.$route.params.id;
+       },
+  methods: {
+    updateRetailer(index) {
+        this.chainDetails.retailers = this.retailers[index];
+    }
+  }
 }
 </script>
 
