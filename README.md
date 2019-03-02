@@ -39,7 +39,7 @@
 + At the storage areas of every stake holder, there is a chance that products of different batches are grouped together. Hence, tracing and tracking of product batches becomes a hassel.
 
 ## Concept <a name="concept"/>
-The idea is the design a system that can keep track of the flow of goods from pallets to cartons to individual products.
+The idea is to design a system that can keep track of the flow of goods from pallets to cartons to individual products.
 
 ### Manufacturing and storing in a Warehouse
 + Once units are created, the container is scanned and then a product is scanned. Then the container is filled with products from the same batch. As a result, that container is mapped to the current batch of products.
