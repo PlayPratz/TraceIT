@@ -1,6 +1,12 @@
 # Track and Trace in the Supply Chain
-A project that aims to make the supply chain easier to track and trace 
+
+<div align="center">
+
+![TraceIT](https://i.imgur.com/LdBukbT.png)
+
+<p align="center">A project that aims to make the supply chain easier to track and trace</p>
 <br><br>
+</div>
 
 # Table of Contents
 + [About](#about)
@@ -30,7 +36,7 @@ A project that aims to make the supply chain easier to track and trace
   6. Retailer
   7. Consumer
 + The transaction of goods happens in pallets, cartons and individual products.
-+ At the storage areas of every stake holder, there is a chance that products of different batches are grouped together. Hence, tracing nad tracking of product batches becomes a hassel.
++ At the storage areas of every stake holder, there is a chance that products of different batches are grouped together. Hence, tracing and tracking of product batches becomes a hassel.
 
 ## Concept <a name="concept"/>
 The idea is the design a system that can keep track of the flow of goods from pallets to cartons to individual products.
@@ -38,7 +44,7 @@ The idea is the design a system that can keep track of the flow of goods from pa
 ### Manufacturing and storing in a Warehouse
 + Once units are created, the container is scanned and then a product is scanned. Then the container is filled with products from the same batch. As a result, that container is mapped to the current batch of products.
 + This container is mapped to a pallet in a similar fashion.
-+ Now, a pallet is added to a bin in the warehouse by mapping the pallet to the bin. If multiple containers are sent, then all of them are mapped to the pallet.
++ Now, a pallet is added to a bin in the warehouse by mapping the pallet to the bin. If multiple containers are sent, then all of them are mapped to that pallet.
 
 ### Dispatching from Warehouse
 + The product that is to be dispatched is mapped to the container in which it will be shipped. The quantity of the product is entered.
