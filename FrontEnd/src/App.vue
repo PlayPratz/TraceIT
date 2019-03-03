@@ -12,6 +12,7 @@
         <v-btn flat to="/login" v-if="authenticated == false">Login</v-btn>
         <v-btn flat to="/register" v-if="authenticated == false">Register</v-btn>
         <v-btn flat to="/InventoryTable" v-if="authenticated == false">Cart</v-btn>
+        <v-btn flat to="/hul" v-if="authenticated == false">HUL</v-btn>
         <v-btn flat to="/" v-if="authenticated" v-on:click.native="logout()" replace>Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>

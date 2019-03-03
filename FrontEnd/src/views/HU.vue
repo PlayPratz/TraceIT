@@ -847,7 +847,7 @@ export default {
           value: 'name'
         }
       ],
-      traders: [
+      traders:
         {
           id: "2016",
           name: "Calden",
@@ -855,7 +855,7 @@ export default {
           address2: "Maharastra",
           address3: "India"
         },
-        manufacturers: [
+        manufacturers:
           {
             id: "2016",
             name: "Calden",
@@ -863,7 +863,7 @@ export default {
             address2: "Maharastra",
             address3: "India"
           },
-          warehouses: [
+          warehouses:
             {
               id: "2016",
               name: "Calden",
@@ -871,7 +871,7 @@ export default {
               address2: "Maharastra",
               address3: "India"
             },
-            distributors: [
+            distributors:
               {
                 id: "2016",
                 name: "Calden",
@@ -879,7 +879,7 @@ export default {
                 address2: "Maharastra",
                 address3: "India"
               },
-              retailers: [
+              retailers:
                 {
                   id: "2016",
                   name: "Calden",
@@ -887,7 +887,7 @@ export default {
                   address2: "Maharastra",
                   address3: "India"
                 }
-      ]
+      
     }
   },
   created() {

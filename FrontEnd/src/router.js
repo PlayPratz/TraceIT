@@ -11,7 +11,7 @@ import DashTrader from './views/Dash/DashTrader.vue'
 import DashManufacturer from './views/Dash/DashManufacturer.vue'
 import DashDistributor from './views/Dash/DashDistributor.vue'
 import DashRetailer from './views/Dash/DashRetailer.vue'
-import Hul from './views/'
+import Hul from './views/HU.vue'
 
 Vue.use(Router)
 
