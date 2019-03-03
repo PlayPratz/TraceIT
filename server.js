@@ -75,10 +75,10 @@ app.post('/paymentUploadRaw',function(req,res){
             "rawbatchId" : req.body.batchID
         };
         console.log(typeof toSend);
-        var options = { 
+        var options = {
             method: 'POST',
             url: ip+"/api/paymentRaw/",
-            headers:{ 
+            headers:{
                 'Content-Type': 'application/json' },
             body: toSend,
             json: true };
@@ -86,12 +86,12 @@ app.post('/paymentUploadRaw',function(req,res){
         Request(options, function (error, response, body) {
             if (error){
                 throw new Error(error);
-            } 
-          
+            }
+
             console.log(body);
         });
 
-        res.sendStatus(200);    
+        res.sendStatus(200);
     }
     catch(error){
         // console.log(error);
@@ -109,9 +109,9 @@ app.post('/paymentUploadTrader',function(req,res){
         console.log(req.body);
         var toSend = {
             "$class" : "org.network.tracktrace.paymentTrade",
-            "trader": "resource:org.network.tracktrace.Factory"+req.body.factoryID, 
-            "amount": req.body.amount, 
-            "qty": req.body.quantity, 
+            "trader": "resource:org.network.tracktrace.Factory"+req.body.factoryID,
+            "amount": req.body.amount,
+            "qty": req.body.quantity,
             "rawbatchId": req.body.batchID
         };
         Request.post(ip+"/api/paymentTrade",(error,success)=>{
@@ -134,9 +134,9 @@ app.post('/paymentUploadDistributor',function(req,res){
         console.log(req.body);
         var toSend = {
             "$class" : "org.network.tracktrace.paymentTrade",
-            "trader": "resource:org.network.tracktrace.Retailer"+req.body.retailerID, 
-            "amount": req.body.amount, 
-            "qty": req.body.quantity, 
+            "trader": "resource:org.network.tracktrace.Retailer"+req.body.retailerID,
+            "amount": req.body.amount,
+            "qty": req.body.quantity,
             "rawbatchId": req.body.batchID
         };
         Request.post(ip+"/api/paymentTrade",(error,success)=>{
@@ -161,20 +161,20 @@ app.get('/',(req,res)=>{
 
 app.post('/nfc',(req,res)=>{
     console.log(req);
-    io.emit('message',{   
+    io.emit('message',{
             packingid:"123",
-            products:[{          
-                "name":"Coffee",          
-                "id":"234",          
-                "batch":"6",          
+            products:[{
+                "name":"Coffee",
+                "id":"234",
+                "batch":"6",
                 "quantity":"25"
-            },{          
-                name:"Chicory",          
-                id:"235",          
-                batch:"10",          
+            },{
+                name:"Chicory",
+                id:"235",
+                batch:"10",
                 quantity:"30"
-            }] 
-    }); 
+            }]
+    });
     res.sendStatus(200);
 });
 
@@ -183,9 +183,9 @@ app.post('/paymentUploadFactory',function(req,res){
         console.log(req.body);
         var toSend = {
             "$class" : "org.network.tracktrace.paymentJam",
-            "trader": "resource:org.network.tracktrace.Distributor"+req.body.distributorID, 
-            "amount": req.body.amount, 
-            "qty": req.body.quantity, 
+            "trader": "resource:org.network.tracktrace.Distributor"+req.body.distributorID,
+            "amount": req.body.amount,
+            "qty": req.body.quantity,
             "rawbatchId": req.body.batchID
         };
         Request.post(ip+"/api/paymentTrade",(error,success)=>{
@@ -275,10 +275,10 @@ app.post('/addRawMaterials',(req,res)=>{
             "owner" : req.body.owner
         };
         console.log(typeof toSend);
-        var options = { 
+        var options = {
             method: 'POST',
             url: ip+"/api/addRaw/",
-            headers:{ 
+            headers:{
                 'Content-Type': 'application/json' },
             body: toSend,
             json: true };
@@ -286,12 +286,12 @@ app.post('/addRawMaterials',(req,res)=>{
         Request(options, function (error, response, body) {
             if (error){
                 throw new Error(error);
-            } 
-          
+            }
+
             console.log(body);
         });
 
-        res.sendStatus(200);    
+        res.sendStatus(200);
     }
     catch(error){
         // console.log(error);
@@ -312,10 +312,10 @@ app.post('/addKetchup',(req,res)=>{
             "owner" : req.body.owner
         };
         console.log(typeof toSend);
-        var options = { 
+        var options = {
             method: 'POST',
             url: ip+"/api/addketchup/",
-            headers:{ 
+            headers:{
                 'Content-Type': 'application/json' },
             body: toSend,
             json: true };
@@ -323,12 +323,12 @@ app.post('/addKetchup',(req,res)=>{
         Request(options, function (error, response, body) {
             if (error){
                 throw new Error(error);
-            } 
-          
+            }
+
             console.log(body);
         });
 
-        res.sendStatus(200);    
+        res.sendStatus(200);
     }
     catch(error){
         // console.log(error);
@@ -348,10 +348,10 @@ app.post('/makeContainer',(req,res)=>{
             "owner" : req.body.owner
         };
         console.log(typeof toSend);
-        var options = { 
+        var options = {
             method: 'POST',
             url: ip+"/api/makeContainer/",
-            headers:{ 
+            headers:{
                 'Content-Type': 'application/json' },
             body: toSend,
             json: true };
@@ -359,12 +359,12 @@ app.post('/makeContainer',(req,res)=>{
         Request(options, function (error, response, body) {
             if (error){
                 throw new Error(error);
-            } 
-          
+            }
+
             console.log(body);
         });
 
-        res.sendStatus(200);    
+        res.sendStatus(200);
     }
     catch(error){
         // console.log(error);
@@ -383,9 +383,43 @@ app.get('/makePallet',(req,res)=>{
             "owner" : "7712"
         };
         console.log(toSend);
-        var options = { 
+        var options = {
             method: 'POST',
             url: ip+"/api/makePallet/",
+            headers:{
+                'Content-Type': 'application/json' },
+            body: toSend,
+            json: true };
+
+        Request(options, function (error, response, body) {
+            if (error){
+                throw new Error(error);
+            }
+
+            console.log(body);
+        });
+
+        res.sendStatus(200);
+    }
+    catch(error){
+        // console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.get('/buyContainerdc',(req,res)=>{
+    try{
+        // console.log(req.body);
+        var toSend = {
+            "$class" :"org.network.hul.buyContainerdc",
+            "rfid" : req.body.rfid,
+            "rfiddcpallet" : req.body.dcrfid,
+            "dcid" : "3434" 
+        };
+        console.log(toSend);
+        var options = { 
+            method: 'POST',
+            url: ip+"/api/buyContainerdc/",
             headers:{ 
                 'Content-Type': 'application/json' },
             body: toSend,
@@ -406,8 +440,6 @@ app.get('/makePallet',(req,res)=>{
         res.sendStatus(500);
     }
 });
-
-
 
 // launch ======================================================================
 //creating a server
