@@ -30,7 +30,18 @@
                       <br />
                       <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.trader.address1}}<br>{{chainDetails.trader.address2}}<br />{{chainDetails.trader.address3}}</h3>
                   </v-flex>
-
+                  <v-data-table
+                    :headers="headers"
+                    :items="traders"
+                    class="elevation-1"
+                  >
+                    <template slot="items" slot-scope="props">
+                      <tr @click="updateTrader(props.index)">
+                        <td class="text-xs-left">{{ props.item.id }}</td>
+                        <td class="text-xs-left">{{ props.item.name }}</td>
+                      </tr>
+                    </template>
+                  </v-data-table>
 
                 <v-flex xs2>
                   <v-icon size="64">mdi-calendar-text</v-icon>
@@ -202,7 +213,18 @@
                         <br />
                         <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.manufacturer.address1}}<br>{{chainDetails.manufacturer.address2}}<br />{{chainDetails.manufacturer.address3}}</h3>
                     </v-flex>
-
+                    <v-data-table
+                      :headers="headers"
+                      :items="manufacturers"
+                      class="elevation-1"
+                    >
+                      <template slot="items" slot-scope="props">
+                        <tr @click="updateManufacturer(props.index)">
+                          <td class="text-xs-left">{{ props.item.id }}</td>
+                          <td class="text-xs-left">{{ props.item.name }}</td>
+                        </tr>
+                      </template>
+                    </v-data-table>
 
                   <v-flex xs2>
                     <v-icon size="64">mdi-calendar-text</v-icon>
@@ -218,7 +240,7 @@
           >
             <v-layout justify-space-between>
               <v-flex xs7>
-                The Order was placed by "Awesome anufacturer"<br/><br/>
+                The Order was placed by "Awesome Trader"<br/><br/>
                 <v-btn small color="primary" dark @click="salesDialog = true">Sales Order</v-btn>
               </v-flex>
               <v-flex xs5 text-xs-right>15:26 EDT</v-flex>
@@ -373,7 +395,18 @@
                           <br />
                           <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.warehouse.address1}}<br>{{chainDetails.warehouse.address2}}<br />{{chainDetails.warehouse.address3}}</h3>
                       </v-flex>
-
+                      <v-data-table
+                        :headers="headers"
+                        :items="warehouses"
+                        class="elevation-1"
+                      >
+                        <template slot="items" slot-scope="props">
+                          <tr @click="updateWarehouse(props.index)">
+                            <td class="text-xs-left">{{ props.item.id }}</td>
+                            <td class="text-xs-left">{{ props.item.name }}</td>
+                          </tr>
+                        </template>
+                      </v-data-table>
 
                     <v-flex xs2>
                       <v-icon size="64">mdi-calendar-text</v-icon>
@@ -389,7 +422,7 @@
             >
               <v-layout justify-space-between>
                 <v-flex xs7>
-                  The Order was placed by "Awesome Warehouse"<br/><br/>
+                  The Order was placed by "Awesome Warehhouse"<br/><br/>
                   <v-btn small color="primary" dark @click="salesDialog = true">Sales Order</v-btn>
                 </v-flex>
                 <v-flex xs5 text-xs-right>15:26 EDT</v-flex>
@@ -518,15 +551,197 @@
             </v-card>
             </v-dialog>
 
+            <v-timeline-item
+              color="deep-purple darken-4"
+              fill-dot
+              right
+            >
+            <v-card>
+              <v-card-title class="deep-purple darken-4">
+              <v-icon
+                dark
+                size="42"
+                class="mr-3"
+              >
+                mdi-magnify
+              </v-icon>
+              <h2 class="display-1 white--text font-weight-light">Distributor</h2>
+            </v-card-title>
+            <v-container>
+              <v-layout>
+
+                  <v-flex xs10>
+                      <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.distributor.name}}</h3>
+                      <br />
+                      <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.distributor.address1}}<br>{{chainDetails.distributor.address2}}<br />{{chainDetails.distributor.address3}}</h3>
+                  </v-flex>
+                  <v-data-table
+                    :headers="headers"
+                    :items="distributors"
+                    class="elevation-1"
+                  >
+                    <template slot="items" slot-scope="props">
+                      <tr @click="updateDistributor(props.index)">
+                        <td class="text-xs-left">{{ props.item.id }}</td>
+                        <td class="text-xs-left">{{ props.item.name }}</td>
+                      </tr>
+                    </template>
+                  </v-data-table>
+
+                <v-flex xs2>
+                  <v-icon size="64">mdi-calendar-text</v-icon>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card>
+        </v-timeline-item>
+        <v-timeline-item
+          class="mb-3"
+          icon-color="grey lighten-2"
+          small
+        >
+          <v-layout justify-space-between>
+            <v-flex xs7>
+              The Order was placed by "Awesome Distributor"<br/><br/>
+              <v-btn small color="primary" dark @click="salesDialog = true">Sales Order</v-btn>
+            </v-flex>
+            <v-flex xs5 text-xs-right>15:26 EDT</v-flex>
+          </v-layout>
+        </v-timeline-item>
+
+
+
+            <!-- Dialog for Sales Order-->
+        <v-dialog
+        v-model="salesDialog"
+        max-width="290"
+        >
+        <v-card>
+          <v-card-title class="headline text-lg-left blue--text">Sales Order</v-card-title>
+
+          <v-card-text class="text-lg-left">
+            <h3>Payment ID: 1001234<br />
+            Material Name: Coffee beans<br />
+            Quantity: 10kg<br />
+            Amount: 10500</h3>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn
+              color="green darken-1"
+              flat="flat"
+              @click="salesDialog = false"
+            >
+              OK
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+        </v-dialog>
+
+
+        <v-timeline-item
+          class="mb-3"
+          icon-color="grey lighten-2"
+          small
+        >
+          <v-layout justify-space-between>
+            <v-flex xs7>
+              Order is packed and ready to be shipped.<br/><br/>
+              <v-btn small color="primary" dark @click="packTicket = true">Packing Ticket</v-btn>
+            </v-flex>
+            <v-flex xs5 text-xs-right>18:45 IST</v-flex>
+          </v-layout>
+        </v-timeline-item>
+
+        <!-- Dialog for Sales Order-->
+        <v-dialog
+          v-model="packTicket"
+          max-width="290"
+        >
+          <v-card >
+            <v-card-title class="headline  text-lg-left blue--text">Packing Ticket</v-card-title>
+
+            <v-card-text class="text-lg-left">
+              <h3>Packment ID: 12345<br />
+              Material Name: Coffee beans<br />
+              Quantity: 10kg<br />
+              Delivery Date: 12/02/1999</h3>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                color="green darken-1"
+                flat="flat"
+                @click="packTicket = false"
+              >
+                OK
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+        <v-timeline-item
+          class="mb-3"
+          icon-color="grey lighten-2"
+          small
+        >
+          <v-layout justify-space-between>
+            <v-flex xs7>
+              Order has arrived at "Awesome Place".<br /><br />
+              <v-btn small color="primary" dark @click="shipTicket = true">Shipment Ticket</v-btn>
+            </v-flex>
+            <v-flex xs5 text-xs-right>22:45 IST</v-flex>
+          </v-layout>
+        </v-timeline-item>
+
+
+              <!-- Dialog for Sales Order-->
+        <v-dialog
+          v-model="shipTicket"
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title class="headline  text-lg-left blue--text">Shipment Ticket</v-card-title>
+
+            <v-card-text class="text-lg-left">
+              <h3>Packment ID: 12345<br />
+              Material Name: Coffee beans<br />
+              Quantity: 10kg<br />
+              Holes: false<br />
+              Condensation: false<br />
+              Insect Activity: false<br />
+              Delivery Date: 12/02/1999</h3>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                color="green darken-1"
+                flat="flat"
+                @click="shipTicket = false"
+              >
+              OK
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+        </v-dialog>
+
+
+
 
 
                 <v-timeline-item
-                  color="deep-purple darken-4"
+                  color="amber darken-4"
                   fill-dot
                   right
                 >
                   <v-card>
-                    <v-card-title class="deep-purple darken-4">
+                    <v-card-title class="amber darken-4">
                     <v-icon
                       dark
                       size="42"
@@ -534,22 +749,22 @@
                     >
                       mdi-magnify
                     </v-icon>
-                    <h2 class="display-1 white--text font-weight-light">Distributor</h2>
+                    <h2 class="display-1 white--text font-weight-light">Retailer</h2>
                   </v-card-title>
                   <v-container>
                     <v-layout>
 
                         <v-flex xs10>
-                            <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.distributor.name}}</h3>
+                            <h2 class="text-lg-left blue--text text--lighten-1">Organization Name : </h2><h3 class="text-lg-left">{{chainDetails.retailer.name}}</h3>
                             <br />
-                            <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.distributor.address1}}<br>{{chainDetails.distributor.address2}}<br />{{chainDetails.distributor.address3}}</h3>
+                            <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.retailer.address1}}<br>{{chainDetails.retailer.address2}}<br />{{chainDetails.retailer.address3}}</h3>
                             <v-data-table
                               :headers="headers"
-                              :items="distributors"
+                              :items="retailers"
                               class="elevation-1"
                             >
                               <template slot="items" slot-scope="props">
-                                <tr @click="updateDistributor(props.index)">
+                                <tr @click="updateRetailer(props.index)">
                                   <td class="text-xs-left">{{ props.item.id }}</td>
                                   <td class="text-xs-left">{{ props.item.name }}</td>
                                 </tr>
@@ -606,9 +821,15 @@ export default {
           address2: "Maharastra",
           address3: "India"
         },
-          distributor:{
+        distributor:{
           name: "Distributor Rocks",
           address1: "Some Distributor Address in nagpur,",
+          address2: "Maharastra",
+          address3: "India"
+        },
+          retailer:{
+          name: "Retailer Rocks",
+          address1: "Some Retailer Address in nagpur,",
           address2: "Maharastra",
           address3: "India"
         }
@@ -626,14 +847,46 @@ export default {
           value: 'name'
         }
       ],
-      distributors: [
+      traders: [
         {
           id: "2016",
           name: "Calden",
-          address1: "Some Distributor Address in nagpur,",
+          address1: "Some trader Address in nagpur,",
           address2: "Maharastra",
           address3: "India"
-        }
+        },
+        manufacturers: [
+          {
+            id: "2016",
+            name: "Calden",
+            address1: "Some manufacturer Address in nagpur,",
+            address2: "Maharastra",
+            address3: "India"
+          },
+          warehouses: [
+            {
+              id: "2016",
+              name: "Calden",
+              address1: "Some warehouse Address in nagpur,",
+              address2: "Maharastra",
+              address3: "India"
+            },
+            distributors: [
+              {
+                id: "2016",
+                name: "Calden",
+                address1: "Some distributor Address in nagpur,",
+                address2: "Maharastra",
+                address3: "India"
+              },
+              retailers: [
+                {
+                  id: "2016",
+                  name: "Calden",
+                  address1: "Some retailers Address in nagpur,",
+                  address2: "Maharastra",
+                  address3: "India"
+                }
       ]
     }
   },

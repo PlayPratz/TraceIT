@@ -12,6 +12,119 @@
 
 
 
+    <v-container
+         id="grid"
+         fluid
+         grid-list-sm
+         tag="section"
+       >
+         <v-layout row wrap>
+           <v-flex tag="h1" class="headline">ABOUT US...</v-flex>
+           <v-flex d-flex xs12 order-xs5>
+             <v-layout column>
+               <v-flex>
+                 <v-card flat>
+                   <v-card-text>{{ about }}</v-card-text>
+                 </v-card>
+               </v-flex>
+               <v-flex>
+                 <v-card flat>
+                   <v-card-text>{{ about }}</v-card-text>
+                 </v-card>
+               </v-flex>
+             </v-layout>
+           </v-flex>
+         </v-layout>
+       </v-container>
+
+
+<h1 class="text-sm-left">MEET THE TEAM</h1>
+    <v-container
+
+
+          grid-list-lg
+
+        >
+
+            <v-layout >
+              <v-flex xs6>
+                <v-card>
+                  <v-img
+                    src="https://picsum.photos/350/165?random"
+                    centre
+                    height="125"
+                    width="125"
+                    class="grey darken-4"
+                  ></v-img>
+                  <v-card-title class="title">height</v-card-title>
+                </v-card>
+              </v-flex>
+
+              <v-flex xs6>
+                <v-card>
+                  <v-img
+                    src="https://picsum.photos/350/165?random"
+                    height="125"
+                    class="grey darken-4"
+                  ></v-img>
+                  <v-card-title class="title">height</v-card-title>
+                </v-card>
+              </v-flex>
+
+              <v-flex xs6>
+                <v-card>
+                  <v-img
+                    src="https://picsum.photos/350/165?random"
+                    height="125"
+                    class="grey darken-4"
+                  ></v-img>
+                  <v-card-title class="title">height</v-card-title>
+                </v-card>
+              </v-flex>
+            </v-layout>
+
+
+
+
+
+            <v-layout>
+              <v-flex xs6>
+                <v-card>
+                  <v-img
+                    src="https://picsum.photos/350/165?random"
+                    height="125"
+                    class="grey darken-4"
+                  ></v-img>
+                  <v-card-title class="title">height</v-card-title>
+                </v-card>
+              </v-flex>
+
+
+              <v-flex xs6>
+                <v-card>
+                  <v-img
+                    src="https://picsum.photos/350/165?random"
+                    height="125"
+                    class="grey darken-4"
+                  ></v-img>
+                  <v-card-title class="title">height</v-card-title>
+                </v-card>
+              </v-flex>
+
+
+              <v-flex xs6>
+                <v-card>
+                  <v-img
+                    src="https://picsum.photos/350/165?random"
+                    height="125"
+                    class="grey darken-4"
+                  ></v-img>
+                  <v-card-title class="title">height</v-card-title>
+                </v-card>
+              </v-flex>
+            </v-layout>
+
+        </v-container>
 
 
 
@@ -19,204 +132,51 @@
 
 
 
+        <v-footer
+              dark
+
+            >
+              <v-card
+                class="flex"
+                flat
+                tile
+              >
+                <v-card-title class="teal">
+                  <v-card-text>
+
+                      <v-flex tag="h1" class="headline">CONTACT US...</v-flex>
+                  </v-card-text>
 
 
+                  <strong class="subheading">Get connected with us on social networks!</strong>
+
+                  <v-spacer></v-spacer>
+
+                  <layout justify-space-around>
+
+                  <v-icon large color="green darken-2">business</v-icon>
+
+        <v-icon large color="blue darken-2">chat</v-icon>
+
+        <v-icon large color="purple darken-2">dialpad</v-icon>
+
+        <v-icon large color="teal darken-2">email</v-icon>
+
+        </layout>
+                </v-card-title>
+
+                <v-card-actions class="grey darken-3 justify-center">
+                  &copy;2018 — <strong>Vuetify</strong>
+                </v-card-actions>
+              </v-card>
+            </v-footer>
 
 
+      </v-app>
+    </div>
+    </template>
 
 
-
-<h1>MEET THE TEAM</h1>
-
-       <v-container
-
-             fluid
-             grid-list-lg
-             fill-height
-             style="min-height: 434px"
-           >
-             <v-fade-transition mode="out-in">
-               <v-layout >
-                 <v-flex xs6>
-                   <v-card>
-                     <v-img
-                       src="https://picsum.photos/350/165?random"
-                       height="125"
-                       class="grey darken-4"
-                     ></v-img>
-                     <v-card-title class="title">height</v-card-title>
-                   </v-card>
-                 </v-flex>
-
-                 <v-flex xs6>
-                   <v-card>
-                     <v-img
-                       src="https://picsum.photos/350/165?random"
-                       height="125"
-                       class="grey darken-4"
-                     ></v-img>
-                     <v-card-title class="title">height</v-card-title>
-                   </v-card>
-                 </v-flex>
-
-                 <v-flex xs6>
-                   <v-card>
-                     <v-img
-                       src="https://picsum.photos/350/165?random"
-                       height="125"
-                       class="grey darken-4"
-                     ></v-img>
-                     <v-card-title class="title">height</v-card-title>
-                   </v-card>
-                 </v-flex>
-
-
-                 <v-flex xs6>
-                   <v-card>
-                     <v-img
-                       src="https://picsum.photos/350/165?random"
-                       height="125"
-                       class="grey darken-4"
-                     ></v-img>
-                     <v-card-title class="title">height</v-card-title>
-                   </v-card>
-                 </v-flex>
-
-
-                 <v-flex xs6>
-                   <v-card>
-                     <v-img
-                       src="https://picsum.photos/350/165?random"
-                       height="125"
-                       class="grey darken-4"
-                     ></v-img>
-                     <v-card-title class="title">height</v-card-title>
-                   </v-card>
-                 </v-flex>
-
-
-                 <v-flex xs6>
-                   <v-card>
-                     <v-img
-                       src="https://picsum.photos/350/165?random"
-                       height="125"
-                       class="grey darken-4"
-                     ></v-img>
-                     <v-card-title class="title">height</v-card-title>
-                   </v-card>
-                 </v-flex>
-               </v-layout>
-             </v-fade-transition>
-           </v-container>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <v-layout row>
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card>
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-            height="200px"
-          >
-          </v-img>
-
-          <v-card-title primary-title>
-            <div>
-              <div class="headline">Top western road trips</div>
-              <span class="grey--text">1,000 miles of wonder</span>
-            </div>
-          </v-card-title>
-
-          <v-card-actions>
-            <v-btn flat>Share</v-btn>
-            <v-btn flat color="purple">Explore</v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon @click="show = !show">
-              <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-            </v-btn>
-          </v-card-actions>
-
-          <v-slide-y-transition>
-            <v-card-text v-show="show">
-              I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
-            </v-card-text>
-          </v-slide-y-transition>
-          <v-card-actions class="white justify-center">
-               <v-btn
-                 v-for="(social, i) in socials"
-                 :key="i"
-                 :color="social.color"
-                 class="white--text"
-                 fab
-                 icon
-                 small
-               >
-                 <v-icon>{{ social.icon }}</v-icon>
-               </v-btn>
-             </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-
-
-    <v-footer
-      dark
-      height="auto"
-    >
-      <v-card
-        flat
-        tile
-        class="indigo lighten-1 white--text text-xs-center"
-      >
-        <v-card-text>
-          <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            class="mx-3 white--text"
-            icon
-          >
-            <v-icon size="24px">{{ icon }}</v-icon>
-          </v-btn>
-        </v-card-text>
-
-        <v-card-text class="white--text pt-0">
-          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-text class="white--text">
-          &copy;2018 — <strong>Vuetify</strong>
-        </v-card-text>
-      </v-card>
-    </v-footer>
-
-
-
-
-
-
-
-
-
-
-
-
-  </v-app>
-</div>
-</template>
 
 <script>
 export default {
@@ -227,57 +187,33 @@ export default {
 
 
 
-
-      socials: [
-      {
-        icon: 'fab fa-facebook',
-        color: 'indigo'
-      },
-      {
-        icon: 'fab fa-linkedin',
-        color: 'cyan darken-1'
-      },
-      {
-        icon: 'fab fa-instagram',
-        color: 'red lighten-3'
-      }
-    ],
-
-
-
-
-    icons: [
-     'fab fa-facebook',
-     'fab fa-twitter',
-     'fab fa-google-plus',
-     'fab fa-linkedin',
-     'fab fa-instagram'
-   ],
-
-
-
-
-
       items: [
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+          src: 'https://i.imgur.com/AksRc29.gif'
         },
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+          src: 'https://i.imgur.com/O1WFmTb.jpg'
         },
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+          src: 'https://i.imgur.com/NmHjpmf.jpg'
         },
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+          src: 'https://i.imgur.com/DQheXD0.jpg'
         }
       ],
 
+       about: `plicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`
 
-          show: true
 
-    }
-  }
+
+
+
+
+
+
+}
+
+}
 }
 </script>
 
