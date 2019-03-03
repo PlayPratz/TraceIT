@@ -96,6 +96,25 @@ async function addketchup(newket) {
 
 
 /**
+ * Add new Coffee by factory
+ * @param {org.network.hul.addCoffee} newcof
+ * @transaction
+ */
+async function addCoffee(newcof){
+	var NS = 'org.network.hul';
+	var cof = getFactory().newResource(NS, 'Bru', Math.random().toString(36).substring(3));
+  	cof.coffee = newcof.coffee;
+  	cof.coffeeqty = newcof.coffeeqty;
+  	cof.chicory = newcof.chicory;
+  	cof.chicoryqty = newcof.chicoryqty;
+  	cof.initialqty = newcof.qty;
+  	cof.qty = newcof.qty;
+  	cof.owner = newcof.owner;
+  	const assetRegistry = await getAssetRegistry('org.network.hul.Bru');
+  	await assetRegistry.add(cof);
+}
+
+/**
  * Create container
  * @param {org.network.hul.makeContainer} newcont
  * @transaction
@@ -104,7 +123,7 @@ async function makeContainer(newcont){
 	var NS = 'org.network.hul';
 	var cont = getFactory().newResource(NS, 'container', Math.random().toString(36).substring(3));
   	cont.rfid = newcont.rfid;
-  	cont.productId = newcont.batchId;
+  	cont.productId = newcont.productId;
   	cont.batchId = newcont.batchId;
   	cont.initialqty = newcont.qty;
   	cont.qty = newcont.qty;
@@ -291,12 +310,12 @@ async function buyContainerretail(newcont) {
  */
 async function traceBatch(newtrace){
 	var cont = await query('Q4',{IdParam: newtrace.batchId});
-  	console.log(cont);
+  	//console.log(cont);
   	var dc = [];
     var dis = [];
     var retailer = [];
   	for (var i in cont){
-      	console.log(cont[i]);
+      	//console.log(cont[i]);
     	dc.push(cont[i].distributorcenterId);
       	dis.push(cont[i].distributerId);
       	retailer.push(cont[i].retailer);
@@ -309,15 +328,124 @@ async function traceBatch(newtrace){
 /**
  * Trace a product given batchId
  * @param {org.network.hul.allbatchId} newtrace
+ * @ returns (String[])
  * @transaction
  */
 async function allbatchId() {
-	const assetRegistry = await getAssetRegistry('org.network.hul.ketchup')
+	const assetRegistry = await getAssetRegistry('org.network.hul.container')
     var all = await assetRegistry.getAll();
   	var batch = [];
   	for (var i in all){
-    	batch.push(all[i].productId);
+    	batch.push(all[i].batchId);
     }
+  	var x = new Set(batch);
+    batch = [...x];
   	console.log(batch);
   	return batch;
+}
+
+
+
+/**
+ * Trace a product given batchId
+ * @param {org.network.hul.disbatchId} newdis
+ * @ returns (String[])
+ * @transaction
+ */
+async function disbatchId(newdis){
+	const assetRegistry = await getAssetRegistry('org.network.hul.container')
+    var all = await assetRegistry.getAll();
+  	var batch = [];
+  	for (var i in all){
+      	//console.log(all[i].distributerId)
+      	//console.log(newdis.disId);
+      	if (all[i].distributerId == newdis.disId)
+    		batch.push(all[i].productId);
+    }
+  	var x = new Set(batch);
+    batch = [...x];
+  	console.log(batch);
+  	return batch;
+}
+
+
+
+/**
+ * Trace a product given batchId
+ * @param {org.network.hul.dcbatchId} newdc
+ * @ returns (String[])
+ * @transaction
+ */
+async function dcbatchId(newdc){
+	const assetRegistry = await getAssetRegistry('org.network.hul.container')
+    var all = await assetRegistry.getAll();
+  	var batch = [];
+  	for (var i in all){
+      	//console.log(all[i].distributerId)
+      	//console.log(newdis.disId);
+      	if (all[i].distributorcenterId == newdc.dcId)
+    		batch.push(all[i].productId);
+    }
+  	var x = new Set(batch);
+    batch = [...x];
+  	console.log(batch);
+  	return batch;
+}
+
+
+
+/**
+ * Trace a product given batchId
+ * @param {org.network.hul.retailbatchId} newdc
+ * @ returns (String[])
+ * @transaction
+ */
+async function retailbatchId(newdc){
+	const assetRegistry = await getAssetRegistry('org.network.hul.container')
+    var all = await assetRegistry.getAll();
+  	var batch = [];
+  	for (var i in all){
+      	//console.log(all[i].distributerId)
+      	//console.log(newdis.disId);
+      	if (all[i].retailer == newdc.retailId)
+    		batch.push(all[i].productId);
+    }
+  	var x = new Set(batch);
+    batch = [...x];
+  	console.log(batch);
+  	return batch;
+}
+
+
+
+/**
+ * Trace a product given batchId
+ * @param {org.network.hul.maketruck} newtruck
+ * @transaction
+ */
+async function maketruck(newtruck) {
+  	var NS = 'org.network.hul'
+	var truck = getFactory().newResource(NS, 'truck', Math.random().toString(36).substring(3));
+	truck.containerId = newtruck.containerId;
+  	truck.owner = newtruck.owner;
+  	truck.remark = newtruck.remark;
+  	const assetRegistry = await getAssetRegistry('org.network.hul.truck');
+  	await assetRegistry.add(truck)
+}
+
+
+
+
+/**
+ * Trace a product given batchId
+ * @param {org.network.hul.updatetrucklocation} newtruck
+ * @transaction
+ */
+async function updatetrucklocation(newtruck){
+	const assetRegistry = await getAssetRegistry('org.network.hul.truck');
+  	var truck = await assetRegistry.get(newtruck.truckId);
+  	truck.lat = newtruck.lat;
+  	truck.lon = newtruck.lon;
+  	truck.alt = newtruck.lat;
+  	await assetRegistry.update(truck);
 }

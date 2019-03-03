@@ -24,6 +24,8 @@ namespace org.network.hul
 concept Address {
     o String city 
     o String country
+    o Double lat
+    o Double lon
 }
 
 /**
@@ -81,6 +83,18 @@ asset ketchup identified by productId {
     o String retailer optional
 }
 
+asset Bru identified by productId{
+	o String productId
+    o String coffee
+    o Double coffeeqty
+    o String chicory
+    o Double chicoryqty
+    o Double initialqty
+    o Double qty
+    o String owner
+    o String retailer optional
+}
+
 asset container identified by containerId {
 	o String containerId
     o String productId
@@ -113,6 +127,16 @@ asset shelf identified by shelfId {
 	
 }
 
+asset truck identified by truckId {
+	o String truckId
+    o String[] containerId
+    o String owner
+    o String remark optional
+    o Double lat optional
+    o Double lon optional
+    o Double alt optional
+}
+
 /**
 * # Transactions
 */
@@ -130,7 +154,15 @@ transaction addketchup {
     o Double sugarqty
     o String salt
     o Double saltqty
-    o Double initialqty
+    o Double qty
+    o String owner
+}
+
+transaction addCoffee {
+	o String coffee
+    o Double coffeeqty
+    o String chicory
+    o Double chicoryqty
     o Double qty
     o String owner
 }
@@ -200,3 +232,27 @@ transaction traceBatch {
 transaction allbatchId {
 	
 }
+
+transaction disbatchId {
+	o String disId
+}
+
+transaction dcbatchId {
+	o String dcId
+}
+
+transaction retailbatchId {
+	o String retailId
+}
+
+transaction maketruck {
+	o String[] containerId
+    o String owner
+    o String remark
+}
+
+transaction updatetrucklocation {
+	o Double lat
+    o Double lon
+    o Double alt
+} 
