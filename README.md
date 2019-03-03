@@ -76,6 +76,8 @@ The idea is to design a system that can keep track of the flow of goods from pal
 
 ## Web Interface
 + The Web Interface allows stakeholders to view details of products pertaining to them.
++ Stakeholders can view details like expected date of arrival, tranaction history, etc.
++ Aditionally, Hindustan Unilever can view every detail of their products in the supply chain. This includes transactions between two stakeholders in the supply chain of a particular product.
 
 ## Contributors <a name="contributors" />
 + [Roshan James](https://github.com/sephiroth7712)
