@@ -159,6 +159,7 @@ app.get('/',(req,res)=>{
 });
 
 app.get('/nfc',(req,res)=>{
+    console.log(req.query);
     res.sendStatus(200);
 });
 
