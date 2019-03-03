@@ -23,7 +23,7 @@
             <td class="text-xs-right">{{ props.item.id }}</td>
             <td class="text-xs-right">{{ props.item.batch }}</td>
             <td class="text-xs-right">{{ props.item.quantity }}</td>
-
+          <td> <v-checkbox v-model="right" label="verified" hide-details></v-checkbox></td>
           </template>
           <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{ search }}" found no results.
