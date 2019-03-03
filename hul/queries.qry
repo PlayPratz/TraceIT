@@ -1,0 +1,23 @@
+/**
+ * get pallet based on rfid
+ */
+query Q1{
+  description: "get pallet based on rfid"
+  statement:
+      SELECT org.network.hul.pallet
+          WHERE (rfid == _$IdParam)
+}
+
+query Q2{
+  description: "get container based on rfid"
+  statement:
+      SELECT org.network.hul.container
+          WHERE (rfid == _$IdParam)
+}
+
+query Q3{
+  description: "get shelf based on rfid"
+  statement:
+      SELECT org.network.hul.shelf
+          WHERE (rfid == _$IdParam)
+}
