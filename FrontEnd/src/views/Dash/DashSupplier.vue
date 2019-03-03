@@ -2,6 +2,9 @@
   <div id="app">
     <v-app id="inspire">
       <v-container style="max-width: 600px;">
+
+        <ProductID v-bind:list="list" v-on:add-id="update"/>
+
         <v-timeline dense clipped>
         <v-timeline-item
           color="amber darken-4"
@@ -210,9 +213,12 @@
 
 <script>
 import axios from 'axios';
-import io from 'socket.io-client';
+import ProductID from '../../components/ProductID';
 export default {
   name: "ProductChain",
+  components: {
+    ProductID
+  },
   data() {
     return {
       id: 0,
@@ -285,7 +291,10 @@ export default {
           address3: "India"
         }
       ],
-    socket : io('192.168.43.149:8081')
+      list: [
+        "123",
+        "456"
+      ]
     }
   },
   created() {
@@ -294,14 +303,11 @@ export default {
   methods: {
     updateTrader(index) {
         this.chainDetails.trader = this.traders[index];
+    },
+    update(batchID) {
+      console.log("Update Tree to " + batchID);
     }
-  },
-  mounted() {
-       this.socket.on('message', (data) => {
-           console.log(data);
-           // you can also do this.messages.push(data)
-       });
-   }
+  }
 }
 </script>
 

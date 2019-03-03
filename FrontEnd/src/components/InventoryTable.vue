@@ -19,7 +19,7 @@
           :search="search"
         >
           <template slot="items" slot-scope="props">
-            <td>{{ props.item.name }}</td>
+            <td class="text-xs-right">{{ props.item.name }}</td>
             <td class="text-xs-right">{{ props.item.id }}</td>
             <td class="text-xs-right">{{ props.item.batch }}</td>
             <td class="text-xs-right">{{ props.item.quantity }}</td>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import io from 'socket.io-client';
 export default {
   name: 'InventoryTable',
     data () {
@@ -43,14 +44,13 @@ export default {
         headers: [
           {
             text: 'PRODUCTS',
-            align: 'left',
+            align: 'right',
             sortable: false,
             value: 'name'
           },
-          { text: 'ID', value: 'id' },
-          { text: 'BATCH NO', value: 'batch' },
-          { text: 'QUANTITY', value: 'quantity' },
-
+          { text: 'ID', align: 'right', value: 'id' },
+          { text: 'BATCH NO', align: 'right', value: 'batch' },
+          { text: 'QUANTITY', align: 'right', value: 'quantity' },
         ],
         products: [
           {
@@ -59,48 +59,22 @@ export default {
             batch: 6,
             quantity: 24,
 
-          },
-          {
-            name: 'Brook Bond Bru',
-            id: 22,
-            batch: 62,
-            quantity: 24,
-
-          },
-          {
-            name: 'Lipton',
-            id: 44,
-            batch: 7,
-            quantity: 24,
-
-          },
-          {
-            name: 'Pepsodent',
-            id: 9,
-            batch: 2,
-            quantity: 24,
-
-          },
-          {
-            name: 'Close up',
-            id: 14,
-            batch: 2,
-            quantity: 44,
-
-          },
-          {
-            name: 'Dove',
-            id: 1,
-            batch: 3,
-            quantity: 22,
-
-          },
-
-
+          }
         ],
+        packingid: "",
+        socket : io('192.168.43.149:8081')
       }
-    }
+    },
+    mounted() {
+     this.socket.on('message', (data) => {
+          console.log(data);
+          console.log(data.products);
+         this.products = data.products;
+         this.packingid = data.packingid;
+     });
+   }
 }
+
 </script>
 
 <style lang="css" scoped>
