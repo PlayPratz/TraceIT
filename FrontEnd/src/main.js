@@ -3,8 +3,7 @@ import App from './App.vue'
 import router from './router'
 import Vuetify from 'vuetify'
 import * as VueGoogleMaps from 'vue2-google-maps'
-import VueWebsocket from "vue-websocket";
-Vue.use(VueWebsocket);
+
 
 Vue.use(Vuetify)
 

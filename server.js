@@ -407,7 +407,39 @@ app.get('/makePallet',(req,res)=>{
     }
 });
 
+app.get('/buyContainerdc',(req,res)=>{
+    try{
+        // console.log(req.body);
+        var toSend = {
+            "$class" :"org.network.hul.buyContainerdc",
+            "rfid" : req.body.rfid,
+            "rfiddcpallet" : req.body.dcrfid,
+            "dcid" : "3434" 
+        };
+        console.log(toSend);
+        var options = { 
+            method: 'POST',
+            url: ip+"/api/buyContainerdc/",
+            headers:{ 
+                'Content-Type': 'application/json' },
+            body: toSend,
+            json: true };
 
+        Request(options, function (error, response, body) {
+            if (error){
+                throw new Error(error);
+            } 
+          
+            console.log(body);
+        });
+
+        res.sendStatus(200);    
+    }
+    catch(error){
+        // console.log(error);
+        res.sendStatus(500);
+    }
+});
 
 // launch ======================================================================
 //creating a server
