@@ -21,3 +21,10 @@ query Q3{
       SELECT org.network.hul.shelf
           WHERE (rfid == _$IdParam)
 }
+
+query Q4{
+  description: "get shelf based on rfid"
+  statement:
+      SELECT org.network.hul.container
+          WHERE (batchId == _$IdParam)
+}

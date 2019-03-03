@@ -13,30 +13,186 @@
  */
 
 /**
- * Write your model definitions here
+ * Sample business network definition.
  */
-
 namespace org.network.hul
 
-participant SampleParticipant identified by participantId {
-  o String participantId
-  o String firstName
-  o String lastName
+/**
+ * # enums + concepts
+ */
+
+concept Address {
+    o String city 
+    o String country
 }
 
-asset SampleAsset identified by assetId {
-  o String assetId
-  --> SampleParticipant owner
-  o String value
+/**
+ * # Participants
+ */
+
+abstract participant Business {
+    o String organization
+    o Address address
 }
 
-transaction SampleTransaction {
-  --> SampleAsset asset
-  o String newValue
+participant rawmaterialSupplier identified by suppilerId extends Business {
+	o String suppilerId
 }
 
-event SampleEvent {
-  --> SampleAsset asset
-  o String oldValue
-  o String newValue
+participant distributionCenter identified by dcId extends Business {
+	o String dcId
+}
+
+participant Distributor identified by disId extends Business {
+	o String disId
+}
+
+participant Factory identified by factId extends Business {
+	o String factId
+}
+
+participant Retailer identified by retailerId extends Business {
+	o String retailerId
+}
+
+/**
+ * # Assets
+ */
+asset rawmaterial identified by batchId {
+	o String batchId
+    o String material
+    o String initialqty
+    o String qty
+    o String owner
+    
+}
+
+asset ketchup identified by productId {
+	o String productId
+    o String tomato
+    o Double tomatoqty
+    o String sugar 
+    o Double sugarqty
+    o String salt
+    o Double saltqty
+    o Double initialqty
+    o Double qty
+    o String owner
+    o String retailer optional
+}
+
+asset container identified by containerId {
+	o String containerId
+    o String productId
+    o String batchId
+    o Double initialqty
+    o Double qty
+    o String rfid
+    o String owner
+    o String distributorcenterId optional
+    o String distributerId optional
+    o String retailer optional
+}
+
+asset pallet identified by palletId {
+	o String palletId
+    o String rfid
+    o String[] containerId optional
+    o Double initialqty
+    o Double qty
+    o String owner
+    o String distributorcenterId optional
+    o String distributerId optional
+}
+
+asset shelf identified by shelfId {
+	o String shelfId
+    o String rfid
+    o String[] containerId optional
+    o String owner
+	
+}
+
+/**
+* # Transactions
+*/
+
+transaction addRaw {
+	o String material
+    o String qty
+    o String owner
+}
+
+transaction addketchup {
+	o String tomato
+    o Double tomatoqty
+    o String sugar 
+    o Double sugarqty
+    o String salt
+    o Double saltqty
+    o Double initialqty
+    o Double qty
+    o String owner
+}
+
+transaction makeContainer {
+	o String productId
+    o String rfid
+    o String batchId
+    o Double qty
+    o String owner
+}
+
+transaction makePallet {
+  	o String rfid
+	o String[] containerId
+    o Double qty
+    o String owner
+}
+
+transaction makeShelf {
+	o String rfid
+    o String[] containerId
+    o String owner
+}
+
+transaction addtoPallet{
+	o String rfid
+    o String containerId
+}
+
+transaction buyContainerdc {
+  	o String rfid
+    o String rfiddcpallet
+	o String dcId
+}
+
+transaction buyPalletdc {
+  	o String rfid
+	o String dcId
+}
+
+transaction buyContainerdis {
+  	o String rfid
+    o String rfidshelf
+	o String disId
+}
+
+transaction buyPalletdis {
+  	o String rfid
+	o String disId
+}
+
+transaction buyContainerretail {
+  	o String rfid
+    o String rfidretail
+	o String retailId
+}
+
+transaction buyProductretail {
+	o String reatilId
+}
+
+transaction traceBatch {
+	o String batchId
 }
