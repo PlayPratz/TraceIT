@@ -5,8 +5,8 @@
       <v-flex xs12>
         <v-combobox
           v-model="select"
-          :items="items"
-          label="Enter Order ID"
+          :items="list"
+          label="Enter Batch ID"
           v-on:change="changeID()"
         ></v-combobox>
       </v-flex>
@@ -30,6 +30,7 @@ export default {
       ]
     }
   },
+  props: ["list"],
   methods: {
     changeID() {
       this.$emit('add-id',this.select);

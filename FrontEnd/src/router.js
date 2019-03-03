@@ -11,7 +11,7 @@ import DashTrader from './views/Dash/DashTrader.vue'
 import DashManufacturer from './views/Dash/DashManufacturer.vue'
 import DashDistributor from './views/Dash/DashDistributor.vue'
 import DashRetailer from './views/Dash/DashRetailer.vue'
-
+import Hul from './views/'
 
 Vue.use(Router)
 
@@ -77,6 +77,10 @@ export default new Router({
       name: 'InventoryTable',
       component: Table
     },
-
+    {
+      path: '/hul',
+      name: 'HUL',
+      component: Hul
+    }
   ]
 })

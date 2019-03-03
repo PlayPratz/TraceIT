@@ -57,7 +57,7 @@ import axios from 'axios';
         valid: true,
         id: '',
 
-        category: 5,
+        category: 0,
 
         idRules: [
           v => !!v || 'Login ID is required'
@@ -74,34 +74,33 @@ import axios from 'axios';
           const id=this.id;
           const password=this.password;
           this.$router.app.$emit("authenticated",true);
-          axios.post('http://192.168.0.113:8081/login', {
+          axios.post('http://192.168.43.149:8081/login', {
             id,
             password
           })
-            .then(res => this.category = res.data)
+            .then(function(res) {
+              this.category = res.data
+
+              if (this.category == 0) {
+                this.$router.replace({ name: 'dashSupplier', params: { id: this.id } });
+              }
+              if (this.category == 1) {
+                this.$router.replace({ name: 'dashtrader', params: { id: this.id } });
+              }
+              if (this.category == 2) {
+                this.$router.replace({ name: 'dashmanufacturer', params: { id: this.id } });
+              }
+              if (this.category == 3) {
+                this.$router.replace({ name: 'dashdistributor', params: { id: this.id } });
+              }
+              if (this.category == 4) {
+                this.$router.replace({ name: 'dashretailer', params: { id: this.id } });
+              }
+
+            })
             .catch();
+          this.$router.replace({ name: 'dashSupplier', params: { id: this.id } });
         }
-          if (this.category == 0) {
-            this.$router.replace({ name: 'dashSupplier', params: { id: this.id } });
-          }
-
-          if (this.category == 1) {
-            this.$router.replace({ name: 'dashtrader', params: { id: this.id } });
-          }
-          if (this.category == 2) {
-            this.$router.replace({ name: 'dashmanufacturer', params: { id: this.id } });
-          }
-          if (this.category == 3) {
-            this.$router.replace({ name: 'dashdistributor', params: { id: this.id } });
-          }
-          if (this.category == 4) {
-            this.$router.replace({ name: 'dashretailer', params: { id: this.id } });
-          }
-          if (this.category == 5) {
-            this.$router.replace({ name: 'dashhu', params: { id: this.id } });
-          }
-
-
         }
       },
     }
