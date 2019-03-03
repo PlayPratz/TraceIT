@@ -158,10 +158,6 @@ app.get('/',(req,res)=>{
     res.sendStatus(200);
 });
 
-app.get('/nfc',(req,res)=>{
-    console.log(req.query);
-    res.sendStatus(200);
-});
 
 app.post('/nfc',(req,res)=>{
     console.log(req);
@@ -376,17 +372,17 @@ app.post('/makeContainer',(req,res)=>{
     }
 });
 
-app.post('/makePallet',(req,res)=>{
+app.get('/makePallet',(req,res)=>{
     try{
-        console.log(req.body);
+        // console.log(req.body);
         var toSend = {
             "$class" :"org.network.hul.makePallet",
-            "rfid" : req.body.rfid,
-            "containerId" : req.body.cID,
-            "qty" : req.body.qty,
-            "owner" : req.body.owner
+            "rfid" : req.query.rfid,
+            "containerId" : [req.query.cid1,req.query.cid2],
+            "qty" : req.query.qty,
+            "owner" : "7712"
         };
-        console.log(typeof toSend);
+        console.log(toSend);
         var options = { 
             method: 'POST',
             url: ip+"/api/makePallet/",
