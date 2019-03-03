@@ -328,7 +328,7 @@ async function traceBatch(newtrace){
 /**
  * Trace a product given batchId
  * @param {org.network.hul.allbatchId} newtrace
- * @ returns (String[])
+ * @returns {String[]}
  * @transaction
  */
 async function allbatchId() {
@@ -349,7 +349,7 @@ async function allbatchId() {
 /**
  * Trace a product given batchId
  * @param {org.network.hul.disbatchId} newdis
- * @ returns (String[])
+ * @returns {String[]}
  * @transaction
  */
 async function disbatchId(newdis){
@@ -373,7 +373,7 @@ async function disbatchId(newdis){
 /**
  * Trace a product given batchId
  * @param {org.network.hul.dcbatchId} newdc
- * @ returns (String[])
+ * @returns {String[]}
  * @transaction
  */
 async function dcbatchId(newdc){
@@ -397,7 +397,7 @@ async function dcbatchId(newdc){
 /**
  * Trace a product given batchId
  * @param {org.network.hul.retailbatchId} newdc
- * @ returns (String[])
+ * @returns {String[]}
  * @transaction
  */
 async function retailbatchId(newdc){
