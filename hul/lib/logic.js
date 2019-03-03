@@ -305,3 +305,19 @@ async function traceBatch(newtrace){
   	console.log(trace);
   	return trace;
 }
+
+/**
+ * Trace a product given batchId
+ * @param {org.network.hul.allbatchId} newtrace
+ * @transaction
+ */
+async function allbatchId() {
+	const assetRegistry = await getAssetRegistry('org.network.hul.ketchup')
+    var all = await assetRegistry.getAll();
+  	var batch = [];
+  	for (var i in all){
+    	batch.push(all[i].productId);
+    }
+  	console.log(batch);
+  	return batch;
+}

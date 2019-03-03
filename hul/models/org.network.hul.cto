@@ -196,3 +196,7 @@ transaction buyProductretail {
 transaction traceBatch {
 	o String batchId
 }
+
+transaction allbatchId {
+	
+}
