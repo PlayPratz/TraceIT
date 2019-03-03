@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"TraceIt.sessions"},{"v":2,"key":{"expires":1},"name":"expires_1","ns":"TraceIt.sessions","expireAfterSeconds":0}],"uuid":"db6c3c202a0b4ffc96295ba0b8afec74"}

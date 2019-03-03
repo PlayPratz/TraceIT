@@ -267,7 +267,7 @@ app.get('/test2', (req,res) =>{
   });
 });
 
-
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.post('/addRawMaterials',(req,res)=>{
     try{
         console.log(req.body);
@@ -338,6 +338,78 @@ app.post('/addKetchup',(req,res)=>{
         res.sendStatus(500);
     }
 });
+
+app.post('/makeContainer',(req,res)=>{
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" :"org.network.hul.makeContainer",
+            "productId" : req.body.pID,
+            "rfid" : req.body.rfid,
+            "batchId" : req.body.bID,
+            "qty" : req.body.qty,
+            "owner" : req.body.owner
+        };
+        console.log(typeof toSend);
+        var options = { 
+            method: 'POST',
+            url: ip+"/api/makeContainer/",
+            headers:{ 
+                'Content-Type': 'application/json' },
+            body: toSend,
+            json: true };
+
+        Request(options, function (error, response, body) {
+            if (error){
+                throw new Error(error);
+            } 
+          
+            console.log(body);
+        });
+
+        res.sendStatus(200);    
+    }
+    catch(error){
+        // console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.post('/makePallet',(req,res)=>{
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" :"org.network.hul.makePallet",
+            "rfid" : req.body.rfid,
+            "containerId" : req.body.cID,
+            "qty" : req.body.qty,
+            "owner" : req.body.owner
+        };
+        console.log(typeof toSend);
+        var options = { 
+            method: 'POST',
+            url: ip+"/api/makePallet/",
+            headers:{ 
+                'Content-Type': 'application/json' },
+            body: toSend,
+            json: true };
+
+        Request(options, function (error, response, body) {
+            if (error){
+                throw new Error(error);
+            } 
+          
+            console.log(body);
+        });
+
+        res.sendStatus(200);    
+    }
+    catch(error){
+        // console.log(error);
+        res.sendStatus(500);
+    }
+});
+
 
 
 // launch ======================================================================
