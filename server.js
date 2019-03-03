@@ -154,22 +154,31 @@ app.post('/paymentUploadDistributor',function(req,res){
     }
 });
 
+app.get('/',(req,res)=>{
+    res.sendStatus(200);
+});
+
+app.get('/nfc',(req,res)=>{
+    res.sendStatus(200);
+});
+
 app.post('/nfc',(req,res)=>{
-   io.emit('message',{   
-        packingid:"123",
-        products:[{          
-            "name":"Coffee",          
-            "id":"234",          
-            "batch":"6",          
-            "quantity":"25"
-        },{          
-            name:"Chicory",          
-            id:"235",          
-            batch:"10",          
-            quantity:"30"
-        }] 
-   }); 
-   res.sendStatus(200);
+    console.log(req);
+    io.emit('message',{   
+            packingid:"123",
+            products:[{          
+                "name":"Coffee",          
+                "id":"234",          
+                "batch":"6",          
+                "quantity":"25"
+            },{          
+                name:"Chicory",          
+                id:"235",          
+                batch:"10",          
+                quantity:"30"
+            }] 
+    }); 
+    res.sendStatus(200);
 });
 
 app.post('/paymentUploadFactory',function(req,res){
@@ -257,6 +266,79 @@ app.get('/test2', (req,res) =>{
       }
   });
 });
+
+
+app.post('/addRawMaterials',(req,res)=>{
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" :"org.network.hul.addRaw",
+            "material" : req.body.material,
+            "qty" : req.body.quantity,
+            "owner" : req.body.owner
+        };
+        console.log(typeof toSend);
+        var options = { 
+            method: 'POST',
+            url: ip+"/api/addRaw/",
+            headers:{ 
+                'Content-Type': 'application/json' },
+            body: toSend,
+            json: true };
+
+        Request(options, function (error, response, body) {
+            if (error){
+                throw new Error(error);
+            } 
+          
+            console.log(body);
+        });
+
+        res.sendStatus(200);    
+    }
+    catch(error){
+        // console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.post('/addKetchup',(req,res)=>{
+    try{
+        console.log(req.body);
+        var toSend = {
+            "$class" :"org.network.hul.addketchup",
+            "tomato" : req.body.tID,
+            "tomatoqty" : req.body.tqty,
+            "sugar" : req.body.sID,
+            "sugarqty" : req.body.sqty,
+            "qty" : req.body.qty,
+            "owner" : req.body.owner
+        };
+        console.log(typeof toSend);
+        var options = { 
+            method: 'POST',
+            url: ip+"/api/addketchup/",
+            headers:{ 
+                'Content-Type': 'application/json' },
+            body: toSend,
+            json: true };
+
+        Request(options, function (error, response, body) {
+            if (error){
+                throw new Error(error);
+            } 
+          
+            console.log(body);
+        });
+
+        res.sendStatus(200);    
+    }
+    catch(error){
+        // console.log(error);
+        res.sendStatus(500);
+    }
+});
+
 
 // launch ======================================================================
 //creating a server
