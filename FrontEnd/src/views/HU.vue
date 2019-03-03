@@ -2,10 +2,10 @@
   <div id="app">
     <v-app id="inspire">
       <v-container style="max-width: 600px;">
+
+        <ProductID v-bind:list="list" v-on:add-id="update"/>
+
         <v-timeline dense clipped>
-
-
-
           <v-timeline-item
             color="yellow accent-4"
             fill-dot
@@ -30,23 +30,20 @@
                       <br />
                       <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.trader.address1}}<br>{{chainDetails.trader.address2}}<br />{{chainDetails.trader.address3}}</h3>
                   </v-flex>
-                  <v-data-table
-                    :headers="headers"
-                    :items="traders"
-                    class="elevation-1"
-                  >
-                    <template slot="items" slot-scope="props">
-                      <tr @click="updateTrader(props.index)">
-                        <td class="text-xs-left">{{ props.item.id }}</td>
-                        <td class="text-xs-left">{{ props.item.name }}</td>
-                      </tr>
-                    </template>
-                  </v-data-table>
 
-                <v-flex xs2>
-                  <v-icon size="64">mdi-calendar-text</v-icon>
-                </v-flex>
               </v-layout>
+              <v-data-table
+                :headers="headers"
+                :items="traders"
+                class="elevation-1"
+              >
+                <template slot="items" slot-scope="props">
+                  <tr @click="updateTrader(props.index)">
+                    <td class="text-xs-left">{{ props.item.id }}</td>
+                    <td class="text-xs-left">{{ props.item.name }}</td>
+                  </tr>
+                </template>
+              </v-data-table>
             </v-container>
           </v-card>
         </v-timeline-item>
@@ -213,23 +210,20 @@
                         <br />
                         <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.manufacturer.address1}}<br>{{chainDetails.manufacturer.address2}}<br />{{chainDetails.manufacturer.address3}}</h3>
                     </v-flex>
-                    <v-data-table
-                      :headers="headers"
-                      :items="manufacturers"
-                      class="elevation-1"
-                    >
-                      <template slot="items" slot-scope="props">
-                        <tr @click="updateManufacturer(props.index)">
-                          <td class="text-xs-left">{{ props.item.id }}</td>
-                          <td class="text-xs-left">{{ props.item.name }}</td>
-                        </tr>
-                      </template>
-                    </v-data-table>
 
-                  <v-flex xs2>
-                    <v-icon size="64">mdi-calendar-text</v-icon>
-                  </v-flex>
                 </v-layout>
+                <v-data-table
+                  :headers="headers"
+                  :items="manufacturers"
+                  class="elevation-1"
+                >
+                  <template slot="items" slot-scope="props">
+                    <tr @click="updateManufacturer(props.index)">
+                      <td class="text-xs-left">{{ props.item.id }}</td>
+                      <td class="text-xs-left">{{ props.item.name }}</td>
+                    </tr>
+                  </template>
+                </v-data-table>
               </v-container>
             </v-card>
           </v-timeline-item>
@@ -395,23 +389,20 @@
                           <br />
                           <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.warehouse.address1}}<br>{{chainDetails.warehouse.address2}}<br />{{chainDetails.warehouse.address3}}</h3>
                       </v-flex>
-                      <v-data-table
-                        :headers="headers"
-                        :items="warehouses"
-                        class="elevation-1"
-                      >
-                        <template slot="items" slot-scope="props">
-                          <tr @click="updateWarehouse(props.index)">
-                            <td class="text-xs-left">{{ props.item.id }}</td>
-                            <td class="text-xs-left">{{ props.item.name }}</td>
-                          </tr>
-                        </template>
-                      </v-data-table>
 
-                    <v-flex xs2>
-                      <v-icon size="64">mdi-calendar-text</v-icon>
-                    </v-flex>
                   </v-layout>
+                  <v-data-table
+                    :headers="headers"
+                    :items="warehouses"
+                    class="elevation-1"
+                  >
+                    <template slot="items" slot-scope="props">
+                      <tr @click="updateWarehouse(props.index)">
+                        <td class="text-xs-left">{{ props.item.id }}</td>
+                        <td class="text-xs-left">{{ props.item.name }}</td>
+                      </tr>
+                    </template>
+                  </v-data-table>
                 </v-container>
               </v-card>
             </v-timeline-item>
@@ -575,23 +566,21 @@
                       <br />
                       <h2 class="text-lg-left blue--text text--lighten-1">Address :</h2><h3 class="text-lg-left">{{chainDetails.distributor.address1}}<br>{{chainDetails.distributor.address2}}<br />{{chainDetails.distributor.address3}}</h3>
                   </v-flex>
-                  <v-data-table
-                    :headers="headers"
-                    :items="distributors"
-                    class="elevation-1"
-                  >
-                    <template slot="items" slot-scope="props">
-                      <tr @click="updateDistributor(props.index)">
-                        <td class="text-xs-left">{{ props.item.id }}</td>
-                        <td class="text-xs-left">{{ props.item.name }}</td>
-                      </tr>
-                    </template>
-                  </v-data-table>
 
-                <v-flex xs2>
-                  <v-icon size="64">mdi-calendar-text</v-icon>
-                </v-flex>
+
               </v-layout>
+              <v-data-table
+                :headers="headers"
+                :items="distributors"
+                class="elevation-1"
+              >
+                <template slot="items" slot-scope="props">
+                  <tr @click="updateDistributor(props.index)">
+                    <td class="text-xs-left">{{ props.item.id }}</td>
+                    <td class="text-xs-left">{{ props.item.name }}</td>
+                  </tr>
+                </template>
+              </v-data-table>
             </v-container>
           </v-card>
         </v-timeline-item>
@@ -789,13 +778,18 @@
 </template>
 
 <script>
+import ProductID from '../components/ProductID';
 export default {
   name: "ProductChain",
+  components: {
+    ProductID
+  },
   data() {
     return {
       salesDialog: false,
       packTicket: false,
       shipTicket: false,
+      //Data for Card Heads
       chainDetails: {
         rawMaterialSupplier: {
           name: "Supplier Rocks",
@@ -835,6 +829,7 @@ export default {
         }
 
       },
+      //Data for tables
       headers: [
         {
           text: 'ID',
@@ -847,47 +842,55 @@ export default {
           value: 'name'
         }
       ],
-      traders:
-        {
-          id: "2016",
-          name: "Calden",
-          address1: "Some trader Address in nagpur,",
-          address2: "Maharastra",
-          address3: "India"
-        },
-        manufacturers:
+      traders: [
+          {
+            id: "2016",
+            name: "Calden",
+            address1: "Some trader Address in nagpur,",
+            address2: "Maharastra",
+            address3: "India"
+          }
+        ],
+        manufacturers: [
           {
             id: "2016",
             name: "Calden",
             address1: "Some manufacturer Address in nagpur,",
             address2: "Maharastra",
             address3: "India"
-          },
-          warehouses:
-            {
-              id: "2016",
-              name: "Calden",
-              address1: "Some warehouse Address in nagpur,",
-              address2: "Maharastra",
-              address3: "India"
-            },
-            distributors:
-              {
-                id: "2016",
-                name: "Calden",
-                address1: "Some distributor Address in nagpur,",
-                address2: "Maharastra",
-                address3: "India"
-              },
-              retailers:
-                {
-                  id: "2016",
-                  name: "Calden",
-                  address1: "Some retailers Address in nagpur,",
-                  address2: "Maharastra",
-                  address3: "India"
-                }
-      
+          }
+        ],
+        warehouses: [
+          {
+            id: "2016",
+            name: "Calden",
+            address1: "Some warehouse Address in nagpur,",
+            address2: "Maharastra",
+            address3: "India"
+          }
+        ],
+        distributors: [
+          {
+            id: "2016",
+            name: "Calden",
+            address1: "Some distributor Address in nagpur,",
+            address2: "Maharastra",
+            address3: "India"
+          }
+        ],
+        retailers: [
+          {
+            id: "2016",
+            name: "Calden",
+            address1: "Some retailers Address in nagpur,",
+            address2: "Maharastra",
+            address3: "India"
+          }
+        ],
+        list: [
+          "123",
+          "456"
+        ]
     }
   },
   created() {
