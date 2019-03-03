@@ -137,6 +137,13 @@ asset truck identified by truckId {
     o Double alt optional
 }
 
+asset trace identified by traceId{
+  	o String traceId
+	o String[] dc
+    o String[] dis
+    o String[] reatiler
+}
+
 /**
 * # Transactions
 */
